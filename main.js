@@ -10,14 +10,16 @@ let config = {
         default: 'arcade',
         arcade: {
             gravity: { y: 100*3 },
-            debug: true,
+            debug: false,
         }
     },
     scene: [
         new Ui(),
-
-        new Tableau00("Des étoiles"),
-        new Tableau01("Des plateformes"),
+        
+        new Tableau05("Extend un tableau"),
+        new Tableau00a("Toto"),
+        new Tableau00("Des étoiles"),  
+        new Tableau01("Des plateformes"), 
         new Tableau02("Plein d'étoiles"),
         new Tableau03("Des plateformes qui bougent"),
         new Tableau04("Jouer avec les groupes"),
