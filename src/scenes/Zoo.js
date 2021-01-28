@@ -3,6 +3,11 @@ class Zoo extends Tableau{
     preload(){
         super.preload();
         this.load.image('sky-2', 'assets/sky-2.png');
+        this.load.image('panthere', 'assets/panther.png')
+        this.load.image('mosquito', 'assets/mosquito.png')
+        this.load.image('parrot', 'assets/parrot.png')
+        this.load.image('frog', 'assets/frog.png')
+        this.load.image('monkey', 'assets/monkey.png')
     }
 
     create(){
@@ -20,7 +25,7 @@ class Zoo extends Tableau{
         this.player.setDepth(10)
 
         //Proto 1
-        this.monstre1=this.physics.add.sprite(300,this.sys.canvas.height-70,'proto ');
+        this.monstre1=this.physics.add.sprite(300,this.sys.canvas.height-70,'panthere');
         this.monstre1.setOrigin(0,0);
         this.monstre1.setDisplaySize(64,64);
         this.monstre1.setCollideWorldBounds(true);
@@ -29,7 +34,7 @@ class Zoo extends Tableau{
         this.physics.add.overlap(this.player, this.monstre1, this.hitSpike, null, this);
 
         //Proto 2
-        this.monstre=this.physics.add.sprite(300,this.sys.canvas.height-70,'proto 2');
+        this.monstre=this.physics.add.sprite(300,this.sys.canvas.height-70,'frog');
         this.monstre.setOrigin(Phaser.Math.Between(0,4),3);
         this.monstre.setDisplaySize(64,64);
         this.monstre.setCollideWorldBounds(true);
@@ -43,7 +48,7 @@ class Zoo extends Tableau{
         this.physics.add.overlap(this.player, this.monstre, this.hitSpike, null, this);
 
         //Proto 3
-        this.monstre2=this.physics.add.sprite(300,this.sys.canvas.height-70,'proto ');
+        this.monstre2=this.physics.add.sprite(300,this.sys.canvas.height-70,'parrot');
         this.monstre2.setOrigin(-9,5);
         this.monstre2.setDisplaySize(64,64);
         this.monstre2.setCollideWorldBounds(false);
@@ -53,7 +58,7 @@ class Zoo extends Tableau{
         this.monstre2.body.allowGravity = false;
         
         //Proto 4
-        this.monstre3=this.physics.add.sprite(300,this.sys.canvas.height-70,'proto ');
+        this.monstre3=this.physics.add.sprite(300,this.sys.canvas.height-70,'monkey');
         this.monstre3.setOrigin(-7,5);
         this.monstre3.setDisplaySize(64,64);    
         this.monstre3.setVelocityY(-100);
@@ -61,7 +66,7 @@ class Zoo extends Tableau{
         this.monstre3.body.allowGravity = false;
 
         //Proto 5
-        this.monstre4=this.physics.add.sprite(300,this.sys.canvas.height-70,'proto ');
+        this.monstre4=this.physics.add.sprite(300,this.sys.canvas.height-70,'mosquito');
         this.monstre4.setOrigin(-1,3);
         this.monstre4.setDisplaySize(64,64);    
         this.physics.add.overlap(this.player, this.monstre4, this.hitSpike, null, this);
