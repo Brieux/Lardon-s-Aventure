@@ -1,3 +1,3 @@
 # platfomer
-https://kpatain.github.io/platformer/
+https://breux.github.io/platformer/
 http://localhost/platformer/
