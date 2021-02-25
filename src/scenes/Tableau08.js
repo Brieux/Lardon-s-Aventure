@@ -4,7 +4,11 @@ class Tableau08 extends Tableau{
         super.preload();
         this.load.image('star', 'assets/star.png');
         this.load.image('ground', 'assets/platform.png');
-        this.load.image('sky-2', 'assets/sky-2.jpg');
+        this.load.image('sky-2', 'assets/sky-2.png');
+        this.load.image('sky', 'assets/sky.png');
+        this.load.image('monstre-violet', 'assets/monstre-violet.png');
+
+        this.load.audio('fond', 'assets/sounds/fond.mp3');
     }
     create() {
         super.create();
@@ -48,18 +52,33 @@ class Tableau08 extends Tableau{
             0,
             this.sys.canvas.width,
             this.sys.canvas.height,
-            'sky-2'
+            'sky'
         );
         this.sky2.setScrollFactor(0);
         this.sky2.setOrigin(0,0);
-        this.sky2.alpha=0.2;
+        this.sky2.alpha=0;
         //this.sky.tileScaleX=this.sky.tileScaleY=0.8;
 
 
         //fait passer les éléments devant le ciel
-        this.platforms.setDepth(10)
-        this.stars.setDepth(10)
-        this.player.setDepth(10)
+        this.platforms.setDepth(10);
+        this.stars.setDepth(10);
+        this.player.setDepth(10);
+
+        /////musique/////////////////////////////////////////////////////////////////////////
+        this.music = this.sound.add('fond');
+
+        var musicConfig = {
+            mute: false,
+            volume: 0.2,
+            rate : 1,
+            detune: 0,
+            seek: 0,
+            loop: false,
+            delay:0,
+        }
+        this.music.play(musicConfig);
+        ///////////////////////////////////////////////////////////////////////////////////////
     }
 
     update(){
@@ -75,4 +94,3 @@ class Tableau08 extends Tableau{
 
 
 }
-

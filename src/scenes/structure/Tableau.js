@@ -39,11 +39,18 @@ class Tableau extends Phaser.Scene{
          */
         this.player=new Player(this,0,0);
 
+
     }
     update(){
         super.update();
         this.player.move();
     }
+
+    /**
+     *
+     * @param {Sprite} object Objet qui saigne
+     * @param {function} onComplete Fonction à appeler quand l'anim est finie
+     */
 
     ramasserEtoile (player, star)
     {
@@ -62,13 +69,6 @@ class Tableau extends Phaser.Scene{
         if(totalActive===0){
             this.win();
         }
-        /*
-        // this.stars est un groupe (plus tard)
-        if (this.stars.countActive(true) === 0)
-        {
-           this.win();
-        }
-         */
     }
 
     /**
@@ -82,6 +82,45 @@ class Tableau extends Phaser.Scene{
         player.setTint(0xff0000);
         player.anims.play('turn');
         this.scene.restart();
+
+    }
+
+    /**
+     * Quand on touche un monstre
+     * si on le touche par en haut on le tue, sinon c'est lui qui nous tue
+     * @param {Player} player
+     * @param {Phaser.Physics.Arcade.Sprite} monster
+     */
+    hitMonster(player, monster){
+        let me=this;
+        if(monster.isDead !== true){ //si notre monstre n'est pas déjà mort
+            if(
+                // si le player descend
+                player.body.velocity.y > 0
+                // et si le bas du player est plus haut que le monstre
+                && player.getBounds().bottom < monster.getBounds().top+30
+
+            ){
+                ui.gagne();
+                monster.isDead=true; //ok le monstre est mort
+                monster.disableBody(true,true);//plus de collision
+                //notre joueur rebondit sur le monstre
+                player.directionY=500;
+            }else{
+                //le joueur est mort
+                if(!me.player.isDead){
+                    me.player.isDead=true;
+                    me.player.visible=false;
+                    me.player.isDead=false;
+                    me.scene.restart();
+                    //ça saigne...
+
+
+                }
+
+
+            }
+        }
 
     }
 

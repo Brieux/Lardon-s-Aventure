@@ -10,13 +10,14 @@ let config = {
         default: 'arcade',
         arcade: {
             gravity: { y: 100*3 },
-            debug: true,
+            debug: false,
         }
     },
     scene: [
         new Ui(),
 
-        new Zoo("Voici Le Zoo de Thaz"),
+        new Niveau1("Rocky"),
+        new Tableau08("Un plateau qui sort du cadre"),
         new Tableau00("Des étoiles"),
         new Tableau01("Des plateformes"),
         new Tableau02("Plein d'étoiles"),
@@ -25,7 +26,7 @@ let config = {
         new Tableau05("Extend un tableau"),
         new Tableau06("Un monstre!"),
         new Tableau07("Un monstre volant!"),
-        new Tableau08("Un plateau qui sort du cadre"),
+        
 
     ],
     width: width,
@@ -48,6 +49,7 @@ let config = {
 
     },
     autoRound: false
+    
 };
 let game;
 function resize() {
