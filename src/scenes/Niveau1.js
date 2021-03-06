@@ -3,19 +3,27 @@ class Niveau1 extends Tableau{
     preload() {
         super.preload();
         this.load.image('star', 'assets/star.png');
-        this.load.image('monster-violet', 'assets/monster-violet.png');
-        this.load.image('monstre2', 'assets/monstre2.png');
-        this.load.image('monstre3', 'assets/monstre3.png');
-        this.load.image('monster-fly', 'assets/monster-fly.png');
+        this.load.image('monster-violet', 'assets/ennemi.png');
+        this.load.image('monstre2', 'assets/ennemi.png');
+        this.load.image('monstre3', 'assets/ennemi.png');
+        this.load.image('monster-fly', 'assets/ennemi.png');
         this.load.image('ground', 'assets/platform.png');
-        this.load.image('sky-2', 'assets/sky-2.png');
-
-
-
-
+        this.load.image('first', 'assets/poteau.png');
+        this.load.image('sol', 'assets/quai1.png');
+        this.load.image('train', 'assets/train.png');
+        this.load.image('fond', 'assets/quai2.png');
+        this.load.video('intro', 'assets/intro.mp4','loadeddata', false, true);
     }
+
     create() {
         super.create();
+
+        vid = this.add.video(448, 224, 'intro');
+        vid.setDisplaySize(896,448);
+        vid.play(true);
+        vid.setDepth(40);
+        vid.setLoop(false);
+        console.log(vid.getDuration());
 
         /////////////////////////////////////////////// La BASE DU NIVEAU /////////////////////////////////////
 
@@ -36,21 +44,45 @@ class Niveau1 extends Tableau{
             0,
             this.sys.canvas.width,
             this.sys.canvas.height,
-            'sky-2'
+            'fond'
         );
         this.sky.setOrigin(0,0);
         this.sky.setScrollFactor(0);//fait en sorte que le ciel ne suive pas la caméra
+
+        this.sky3=this.add.tileSprite(
+          0,
+          65,
+          this.sys.canvas.width,
+          this.sys.canvas.height,
+          'train'
+        );
+        this.sky3.setScrollFactor(0);
+        this.sky3.setOrigin(0,0);
+        this.sky3.alpha=1;
         //on ajoute une deuxième couche de ciel
         this.sky2=this.add.tileSprite(
             0,
             0,
             this.sys.canvas.width,
             this.sys.canvas.height,
-            'sky'
+            'sol'
         );
         this.sky2.setScrollFactor(0);
         this.sky2.setOrigin(0,0);
-        this.sky2.alpha=0;
+        this.sky2.alpha=1;
+
+        this.foreground=this.add.tileSprite(
+            0,
+            0,
+            this.sys.canvas.width,
+            this.sys.canvas.height,
+            'first'
+        );
+        this.foreground.setScrollFactor(0);
+        this.foreground.setOrigin(0,0);
+        this.foreground.alpha=1;
+        this.foreground.setDepth(20);
+
 
         this.player.setDepth(10);
 
@@ -91,16 +123,10 @@ class Niveau1 extends Tableau{
 
         //Monstres
         new monstre2(this,400,100);
-        new monstre2(this,800,100);
-        new monstre2(this,1200,100);
-        new monstre2(this,1930,100);
         new MonsterFly(this,400,150);
-        new MonsterFly(this,1000,200);
-        new MonsterFly(this,1800,100);
         new monstre3(this,1000,150);
         new monstreviolet(this,450,300);
-        new monstreviolet(this,800,300);
-        new monstreviolet(this,1800,300);
+
 
 
 
@@ -110,11 +136,15 @@ class Niveau1 extends Tableau{
     update(){
         super.update();
         //le ciel se déplace moins vite que la caméra pour donner un effet paralax
-        this.sky.tilePositionX=this.cameras.main.scrollX*0.6;
-        this.sky.tilePositionY=this.cameras.main.scrollY*0.2;
+        this.foreground.tilePositionX=this.cameras.main.scrollX*1.2;
+        this.sky2.tilePositionX=this.cameras.main.scrollX*0.6;
+
+        this.sky3.tilePositionX = this.cameras.main.scrollX*0.3+500;
         //le deuxième ciel se déplace moins vite pour accentuer l'effet
-        this.sky2.tilePositionX=this.cameras.main.scrollX*0.3+500;
-        this.sky2.tilePositionY=this.cameras.main.scrollY*0.1+30;
+        this.sky.tilePositionX=this.cameras.main.scrollX*0.3+500;
+        if (vid.getCurrentTime() == vid.getDuration()){
+          vid.alpha -= 0.1;
+        }
     }
 
 

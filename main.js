@@ -1,6 +1,7 @@
 
 let width=14*64; //896;
 let height=7*64; //448;
+var vid;
 
 let config = {
     type: Phaser.AUTO,
@@ -26,7 +27,7 @@ let config = {
         new Tableau05("Extend un tableau"),
         new Tableau06("Un monstre!"),
         new Tableau07("Un monstre volant!"),
-        
+
 
     ],
     width: width,
@@ -49,7 +50,7 @@ let config = {
 
     },
     autoRound: false
-    
+
 };
 let game;
 function resize() {
