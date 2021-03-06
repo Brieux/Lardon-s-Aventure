@@ -2,6 +2,8 @@
 let width=14*64; //896;
 let height=7*64; //448;
 var vid;
+var cafard;
+var criquet;
 
 let config = {
     type: Phaser.AUTO,

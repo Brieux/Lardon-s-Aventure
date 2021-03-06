@@ -58,14 +58,16 @@ class Player extends Phaser.Physics.Arcade.Sprite{
      * Déplace le joueur en fonction des directions données
      */
     move(){
-
+        var posX = this.x / 64;
+        var posY = this.y;
+        posX = Math.trunc(posX);
+        console.log("sur la case numero : " + posX);
         switch (true){
             case this._directionX<0:
                 this.setVelocityX(-160);
                 this.anims.play('left', true);
                 break;
             case this._directionX>0:
-
                 this.setVelocityX(160);
                 this.anims.play('right', true);
                 break;

@@ -21,7 +21,7 @@ class Niveau1 extends Tableau{
         vid.play(true);
         vid.setDepth(40);
         vid.setLoop(false);
-        console.log(vid.getDuration());
+        //vid.setCurrentTime(vid.getDuration());
 
         /////////////////////////////////////////////// La BASE DU NIVEAU /////////////////////////////////////
 
@@ -98,6 +98,10 @@ class Niveau1 extends Tableau{
 
         this.physics.add.collider(this.player,this.platforms);
 
+        //Monstres
+        cafard = new monstre2(this,400,100);
+
+        criquet = new monstreviolet(this,450,200);
 
         //plateformes
         let plate = this.physics.add.staticGroup();
@@ -118,10 +122,9 @@ class Niveau1 extends Tableau{
             child.refreshBody();});
         this.physics.add.collider(this.player, plate);
         this.physics.add.collider(this.star1, plate);
+        this.physics.add.collider(cafard, plate);
+        this.physics.add.collider(criquet, plate);
 
-        //Monstres
-        new monstre2(this,400,100);
-        new monstreviolet(this,450,300);
 
 
 
@@ -144,6 +147,10 @@ class Niveau1 extends Tableau{
         if (vid.getCurrentTime() != vid.getDuration()){
           this.player.stop();
         }
+        cafard.update();
+        criquet.update();
+        //console.log(cafard);
+
     }
 
 
