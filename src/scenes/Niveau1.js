@@ -3,10 +3,8 @@ class Niveau1 extends Tableau{
     preload() {
         super.preload();
         this.load.image('star', 'assets/star.png');
-        this.load.image('monster-violet', 'assets/ennemi.png');
+        this.load.image('monster-violet', 'assets/ennemi2.png');
         this.load.image('monstre2', 'assets/ennemi.png');
-        this.load.image('monstre3', 'assets/ennemi.png');
-        this.load.image('monster-fly', 'assets/ennemi.png');
         this.load.image('ground', 'assets/platform.png');
         this.load.image('first', 'assets/poteau.png');
         this.load.image('sol', 'assets/quai1.png');
@@ -123,8 +121,6 @@ class Niveau1 extends Tableau{
 
         //Monstres
         new monstre2(this,400,100);
-        new MonsterFly(this,400,150);
-        new monstre3(this,1000,150);
         new monstreviolet(this,450,300);
 
 
@@ -144,6 +140,9 @@ class Niveau1 extends Tableau{
         this.sky.tilePositionX=this.cameras.main.scrollX*0.3+500;
         if (vid.getCurrentTime() == vid.getDuration()){
           vid.alpha -= 0.1;
+        }
+        if (vid.getCurrentTime() != vid.getDuration()){
+          this.player.stop();
         }
     }
 
