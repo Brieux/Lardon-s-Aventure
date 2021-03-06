@@ -1,4 +1,5 @@
 class Player extends Phaser.Physics.Arcade.Sprite{
+
     constructor(scene, x, y) {
         super(scene, x, y, "player")
         scene.add.existing(this)
@@ -33,7 +34,9 @@ class Player extends Phaser.Physics.Arcade.Sprite{
 
         this._directionX=0;
         this._directionY=0;
-
+        this.powerAvailable = true;
+        this.basic = 2000
+        this.delay = this.basic;
 
     }
 
@@ -81,14 +84,33 @@ class Player extends Phaser.Physics.Arcade.Sprite{
                 this.setVelocityY(-550);
             }
         }
+      }
+
+      powerUp(scene, time, delta){
+        //console.log(scene);
+        //console.log(time, delta);
+        this.powerUse = scene.input.keyboard.addKey('SPACE');
+        if (this.powerUse.isDown){
+          if(this.powerAvailable){
+            console.log("coucou"); //On fait un truc
+            this.powerAvailable = false;
+          }
+          else {
+            console.log("Sort non utilisable"); //on peut rien faire
+          }
+        }
+        if (this.powerAvailable == false){
+          console.log("recharge"); //on attends
+          this.delay -= delta;
+          if (this.delay < 0){
+            console.log("Sort recup"); //on recup
+            this.powerAvailable = true;
+            this.delay = this.basic;
+          }
+        }
+      }
 
 
-    }
-
-    action(){
-      var interactKey = this.scene.input.keyboard.addKey('SPACE');
-      console.log(interactKey.isDown());
-    }
 
 
 }
