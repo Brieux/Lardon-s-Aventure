@@ -85,5 +85,16 @@ class Player extends Phaser.Physics.Arcade.Sprite{
 
     }
 
+    action(){
+      //console.log(Phaser.Input.Keyboard);
+      this.keyboard.on('keyup', function (event) {
+
+        if (event.keyCode === 32)
+        {
+            console.log("coucou");
+        }
+      });
+    }
+
 
 }
