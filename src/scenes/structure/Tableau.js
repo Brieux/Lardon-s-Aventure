@@ -81,13 +81,20 @@ class Tableau extends Phaser.Scene{
     hitMonster(player, monster){
         let me=this;
         if(monster.isDead !== true){ //si notre monstre n'est pas déjà mort
-            if(
+            if((
                 // si le player descend
                 player.body.velocity.y > 0
                 // et si le bas du player est plus haut que le monstre
                 && player.getBounds().bottom < monster.getBounds().top+30
 
-            ){
+            ) || (
+                player.body.velocity.x >= 3000 // pour tuer les monstre quand on leur dash dessus
+            ) || (
+                player.body.velocity.x <= -3000
+            )
+          )
+
+            {
                 ui.gagne();
                 monster.isDead=true; //ok le monstre est mort
                 monster.disableBody(true,true);//plus de collision

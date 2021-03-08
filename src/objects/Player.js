@@ -34,9 +34,16 @@ class Player extends Phaser.Physics.Arcade.Sprite{
 
         this._directionX=0;
         this._directionY=0;
-        this.powerAvailable = true;
-        this.basic = 2000
-        this.delay = this.basic;
+
+        //dash
+        this.dashAvailable = true;
+        this.dashBasic = 2000
+        this.delayDash = this.dashBasic;
+
+        //attack cac
+        this.cacAvailable = true;
+        this.cacBasic = 2000;
+        this.delayCac = this.cacBasic;
 
     }
 
@@ -64,7 +71,7 @@ class Player extends Phaser.Physics.Arcade.Sprite{
         var posX = this.x / 64;
         var posY = this.y;
         posX = Math.trunc(posX);
-        console.log("sur la case numero : " + posX);
+        //console.log("sur la case numero : " + posX);
         switch (true){
             case this._directionX<0:
                 this.setVelocityX(-160);
@@ -89,27 +96,82 @@ class Player extends Phaser.Physics.Arcade.Sprite{
       powerUp(scene, time, delta){
         //console.log(scene);
         //console.log(time, delta);
-        this.powerUse = scene.input.keyboard.addKey('SPACE');
-        if (this.powerUse.isDown){
-          if(this.powerAvailable){
+        this.dashUse = scene.input.keyboard.addKey('SPACE');
+        this.attackUse = scene.input.keyboard.addKey('Z');
+
+
+        //attack cac
+        if (this.attackUse.isDown){
+          if(this.cacAvailable){
+            console.log("attack"); //On fait un truc
+            this.attackCac();
+            this.cacAvailable = false;
+          }
+          else {
+            console.log("Attaque non utilisable"); //on peut rien faire
+          }
+        }
+        if (this.cacAvailable == false){
+          console.log("recharge"); //on attends
+          this.delayCac -= delta;
+          if (this.delayCac < 0){
+            console.log("attaque recup"); //on recup
+            this.cacAvailable = true;
+            this.cacAvailable = this.cacBasic;
+          }
+        }
+
+
+
+
+        //dash
+        if (this.dashUse.isDown){
+          if(this.dashAvailable){
             console.log("coucou"); //On fait un truc
-            this.powerAvailable = false;
+            this.dash();
+            this.dashAvailable = false;
           }
           else {
             console.log("Sort non utilisable"); //on peut rien faire
           }
         }
-        if (this.powerAvailable == false){
+        if (this.dashAvailable == false){
           console.log("recharge"); //on attends
-          this.delay -= delta;
-          if (this.delay < 0){
+          this.delayDash -= delta;
+          if (this.delayDash < 0){
             console.log("Sort recup"); //on recup
-            this.powerAvailable = true;
-            this.delay = this.basic;
+            this.dashAvailable = true;
+            this.dashAvailable = this.dashBasic;
           }
         }
       }
 
+      dash(){ // la vitesse est la pour le dash //target est la cible du dash
+        var posX = this.x / 64;
+        posX = Math.trunc(posX);
+
+        var target;
+        if (this._directionX > 0){
+          target = posX + 4;
+        }
+        else if (this._directionX < 0){
+          target = posX - 4;
+        }
+        else {
+          target = posX;
+        }
+
+          if (target > posX){
+            this.setVelocityX(3000);
+          }
+          else if (target < posX){
+            this.setVelocityX(-3000);
+        }
+      }
+
+      attackCac(){
+        console.log('attaque');
+      }
 
 
 

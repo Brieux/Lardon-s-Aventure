@@ -21,7 +21,7 @@ class Niveau1 extends Tableau{
         vid.play(true);
         vid.setDepth(40);
         vid.setLoop(false);
-        //vid.setCurrentTime(vid.getDuration());
+        vid.setCurrentTime(vid.getDuration());
 
         /////////////////////////////////////////////// La BASE DU NIVEAU /////////////////////////////////////
 
