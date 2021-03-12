@@ -24,4 +24,8 @@ class monstreviolet extends ObjetEnnemi{
       }
     }
 
+    getKilled(){
+
+    }
+
 }

@@ -22,4 +22,8 @@ class monstre2 extends ObjetEnnemi{
         this.setFlip(false, false);
       }
     }
+
+    getKilled(){
+        this.destroy();
+    }
 }

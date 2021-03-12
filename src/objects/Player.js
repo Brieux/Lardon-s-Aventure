@@ -103,21 +103,21 @@ class Player extends Phaser.Physics.Arcade.Sprite{
         //attack cac
         if (this.attackUse.isDown){
           if(this.cacAvailable){
-            console.log("attack"); //On fait un truc
+            //console.log("attack"); //On fait un truc
             this.attackCac();
             this.cacAvailable = false;
           }
           else {
-            console.log("Attaque non utilisable"); //on peut rien faire
+            //console.log("Attaque non utilisable"); //on peut rien faire
           }
         }
         if (this.cacAvailable == false){
-          console.log("recharge"); //on attends
+          //console.log("recharge"); //on attends
           this.delayCac -= delta;
           if (this.delayCac < 0){
-            console.log("attaque recup"); //on recup
+            //console.log("attaque recup"); //on recup
             this.cacAvailable = true;
-            this.cacAvailable = this.cacBasic;
+            this.delayCac = this.cacBasic;
           }
         }
 
@@ -127,23 +127,25 @@ class Player extends Phaser.Physics.Arcade.Sprite{
         //dash
         if (this.dashUse.isDown){
           if(this.dashAvailable){
-            console.log("coucou"); //On fait un truc
+            //console.log("coucou"); //On fait un truc
             this.dash();
             this.dashAvailable = false;
           }
           else {
-            console.log("Sort non utilisable"); //on peut rien faire
+            //console.log("Sort non utilisable"); //on peut rien faire
           }
         }
+
         if (this.dashAvailable == false){
-          console.log("recharge"); //on attends
+          //console.log("recharge"); //on attends
           this.delayDash -= delta;
           if (this.delayDash < 0){
-            console.log("Sort recup"); //on recup
+            //console.log("Sort recup"); //on recup
             this.dashAvailable = true;
-            this.dashAvailable = this.dashBasic;
+            this.delayDash = this.dashBasic;
           }
         }
+        //console.log(this.dashUse.isDown, this.dashAvailable, this.delayDash, this.dashBasic);
       }
 
       dash(){ // la vitesse est la pour le dash //target est la cible du dash
@@ -152,25 +154,48 @@ class Player extends Phaser.Physics.Arcade.Sprite{
 
         var target;
         if (this._directionX > 0){
-          target = posX + 4;
+          target = posX + 8;
         }
         else if (this._directionX < 0){
-          target = posX - 4;
+          target = posX - 8;
         }
         else {
           target = posX;
         }
 
           if (target > posX){
-            this.setVelocityX(3000);
+            this.setVelocityX(8000);
           }
           else if (target < posX){
-            this.setVelocityX(-3000);
+            this.setVelocityX(-8000);
         }
       }
 
       attackCac(){
-        console.log('attaque');
+        console.log(ennemis);
+        var i;
+        for(i = 0; i < ennemis.length; i++){
+            console.log(ennemis[i].x, ennemis[i].y);
+            if (this._directionX > 0) {
+                console.log("droit");
+                if (ennemis[i].x > this.x) {
+                    if (((ennemis[i].x / 64) - 2) - (this.x / 64) <= 0) {
+                        ennemis[i].isDead = true; //ok le monstre est mort
+                        ennemis[i].disableBody(true, true);
+                    }
+                }
+            }
+
+            if (this._directionX < 0) {
+                console.log("gauche");
+                if (ennemis[i].x < this.x) {
+                    if (((ennemis[i].x / 64) + 2) - (this.x / 64) >= 0) {
+                        ennemis[i].isDead = true; //ok le monstre est mort
+                        ennemis[i].disableBody(true, true);
+                    }
+                }
+            }
+        }
       }
 
 

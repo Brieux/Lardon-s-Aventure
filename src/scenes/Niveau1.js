@@ -100,8 +100,10 @@ class Niveau1 extends Tableau{
 
         //Monstres
         cafard = new monstre2(this,400,100);
+        ennemis[0] = cafard;
 
         criquet = new monstreviolet(this,450,200);
+        ennemis[1] = criquet;
 
         //plateformes
         let plate = this.physics.add.staticGroup();
