@@ -20,7 +20,8 @@ let config = {
     scene: [
         new Ui(),
 
-        new Niveau1("Rocky"),
+        new Niveau1("Cliquez pour aller sur le niveau tile"),
+        new tile("Niveau til"),
         new Tableau08("Un plateau qui sort du cadre"),
         new Tableau00("Des étoiles"),
         new Tableau01("Des plateformes"),
