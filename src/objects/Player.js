@@ -45,6 +45,12 @@ class Player extends Phaser.Physics.Arcade.Sprite{
         this.cacBasic = 2000;
         this.delayCac = this.cacBasic;
 
+        //attack a distance
+        this.rangeAvailable = true;
+        this.rangeBasic = 2000;
+        this.delayRange = this.rangeBasic;
+
+
     }
 
     set directionX(value){
@@ -52,6 +58,7 @@ class Player extends Phaser.Physics.Arcade.Sprite{
     }
     set directionY(value){
         this._directionY=value;
+
     }
 
     /**
@@ -98,6 +105,7 @@ class Player extends Phaser.Physics.Arcade.Sprite{
         //console.log(time, delta);
         this.dashUse = scene.input.keyboard.addKey('SPACE');
         this.attackUse = scene.input.keyboard.addKey('Z');
+        this.rangeUse = scene.input.keyboard.addKey('E');
 
 
         //attack cac
@@ -145,6 +153,29 @@ class Player extends Phaser.Physics.Arcade.Sprite{
             this.delayDash = this.dashBasic;
           }
         }
+
+
+          //Range
+          if (this.rangeUse.isDown){
+              if(this.rangeAvailable){
+                  //console.log("coucou"); //On fait un truc
+                  this.range();
+                  this.rangeAvailable = false;
+              }
+              else {
+                  //console.log("Sort non utilisable"); //on peut rien faire
+              }
+          }
+
+          if (this.rangeAvailable == false){
+              //console.log("recharge"); //on attends
+              this.delayRange -= delta;
+              if (this.delayRange < 0){
+                  //console.log("Sort recup"); //on recup
+                  this.rangeAvailable = true;
+                  this.delayRange = this.rangeBasic;
+              }
+          }
         //console.log(this.dashUse.isDown, this.dashAvailable, this.delayDash, this.dashBasic);
       }
 
@@ -171,33 +202,37 @@ class Player extends Phaser.Physics.Arcade.Sprite{
         }
       }
 
-      attackCac(){
-        console.log(ennemis);
-        var i;
-        for(i = 0; i < ennemis.length; i++){
-            console.log(ennemis[i].x, ennemis[i].y);
-            if (this._directionX > 0) {
-                console.log("droit");
-                if (ennemis[i].x > this.x) {
-                    if (((ennemis[i].x / 64) - 2) - (this.x / 64) <= 0) {
-                        ennemis[i].isDead = true; //ok le monstre est mort
-                        ennemis[i].disableBody(true, true);
-                    }
-                }
-            }
+      attackCac() {
+          console.log(ennemis);
+          var i;
+          for (i = 0; i < ennemis.length; i++) {
+              console.log(ennemis[i].x, ennemis[i].y);
+              if (this._directionX > 0) {
+                  console.log("droit");
+                  if (ennemis[i].x > this.x) {
+                      if (((ennemis[i].x / 64) - 2) - (this.x / 64) <= 0) {
+                          ennemis[i].isDead = true; //ok le monstre est mort
+                          ennemis[i].disableBody(true, true);
+                      }
+                  }
+              }
 
-            if (this._directionX < 0) {
-                console.log("gauche");
-                if (ennemis[i].x < this.x) {
-                    if (((ennemis[i].x / 64) + 2) - (this.x / 64) >= 0) {
-                        ennemis[i].isDead = true; //ok le monstre est mort
-                        ennemis[i].disableBody(true, true);
-                    }
-                }
-            }
-        }
+              if (this._directionX < 0) {
+                  console.log("gauche");
+                  if (ennemis[i].x < this.x) {
+                      if (((ennemis[i].x / 64) + 2) - (this.x / 64) >= 0) {
+                          ennemis[i].isDead = true; //ok le monstre est mort
+                          ennemis[i].disableBody(true, true);
+                      }
+                  }
+              }
+          }
       }
+      range(){
+        console.log("Salut");
 
+        var projectile = new range(this.scene, this.x, this.y, 'asset/bomb.png');
+      }
 
 
 }
