@@ -230,8 +230,6 @@ class Player extends Phaser.Physics.Arcade.Sprite{
       }
       range(){
         console.log("Salut");
-
-        var projectile = new range(this.scene, this.x, this.y, 'asset/bomb.png');
       }
 
 
