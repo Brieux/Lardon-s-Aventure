@@ -4,6 +4,7 @@ class tile extends Tableau{
         this.load.image('tiles', 'assets/Tiled/generic_platformer_tiles.png');
         this.load.tilemapTiledJSON('map', 'assets/Tiled/final.json');
         this.load.image('star', 'assets/star.png');
+        this.load.image('check', 'assets/check.png');
     }
 
     create(){
@@ -41,6 +42,34 @@ class tile extends Tableau{
             }
 
         })
+        let ici=this;
+        let playerPos;
+        this.checkPoint = this.physics.add.group({
+            allowGravity: false,
+            immovable:false
+        });
+        this.checkPointsObjects = this.map.getObjectLayer('Checkpoint')['objects'];
+        this.checkPointsObjects.forEach(checkPointsObject => {
+            console.log(checkPointsObject.properties[0].value);
+            let cP = new checkPoint(
+                this,
+                checkPointsObject.x,
+                checkPointsObject.y,
+                'check',
+                checkPointsObject.properties[0].value
+            );
+            this.physics.add.overlap(this.player, cP, function(){
+                cP.savePos();
+            });
+
+            let playerPos = cP.loadPos();
+            if(playerPos){
+                ici.player.setPosition(playerPos.x, playerPos.y);
+            }
+            console.log(playerPos);
+
+        })
+
 
     }
 

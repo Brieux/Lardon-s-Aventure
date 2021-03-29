@@ -45,7 +45,7 @@
          "objects":[
                 {
                  "gid":567,
-                 "height":41.8493661446682,
+                 "height":41.8494,
                  "id":25,
                  "name":"",
                  "properties":[
@@ -62,13 +62,13 @@
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":41.8493661446682,
-                 "x":828.442300521999,
+                 "width":41.8494,
+                 "x":828.442,
                  "y":124
                 }, 
                 {
                  "gid":567,
-                 "height":41.8493661446682,
+                 "height":41.8494,
                  "id":26,
                  "name":"",
                  "properties":[
@@ -85,9 +85,9 @@
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":41.8493661446682,
-                 "x":279.708333333333,
-                 "y":126.768829231916
+                 "width":41.8494,
+                 "x":279.708,
+                 "y":126.769
                 }, 
                 {
                  "gid":567,
@@ -112,9 +112,74 @@
          "visible":true,
          "x":0,
          "y":0
+        }, 
+        {
+         "draworder":"topdown",
+         "id":5,
+         "name":"Checkpoint",
+         "objects":[
+                {
+                 "gid":438,
+                 "height":32,
+                 "id":28,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"checkPoint",
+                         "type":"int",
+                         "value":1
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":64,
+                 "y":385
+                }, 
+                {
+                 "gid":438,
+                 "height":32,
+                 "id":29,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"checkPoint",
+                         "type":"int",
+                         "value":2
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":384,
+                 "y":320
+                }, 
+                {
+                 "gid":438,
+                 "height":32,
+                 "id":30,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"checkPoint",
+                         "type":"int",
+                         "value":3
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":640,
+                 "y":352
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "x":0,
+         "y":0
         }],
- "nextlayerid":5,
- "nextobjectid":28,
+ "nextlayerid":6,
+ "nextobjectid":31,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.4.2",
