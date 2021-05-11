@@ -16,10 +16,15 @@ class Tableau extends Phaser.Scene{
      */
     preload(){
         this.load.image('fond', 'assets/Background2.png');
+<<<<<<< Updated upstream
         this.load.spritesheet('player',
             'assets/player.png',
             { frameWidth: 32, frameHeight: 48  }
         );
+=======
+        this.load.image('player', 'assets/player.png');
+
+>>>>>>> Stashed changes
     }
     create(){
         Tableau.current=this;

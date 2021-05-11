@@ -10,7 +10,11 @@ body{
 
 #game{
     background-color: #111;
+<<<<<<< Updated upstream
     --w:4961px;
+=======
+    --w:1654px;
+>>>>>>> Stashed changes
     --h:964px;
 }
 

@@ -72,6 +72,10 @@
       <workItem from="1617019639959" duration="6659000" />
       <workItem from="1620756674459" duration="1463000" />
       <workItem from="1620758240830" duration="1236000" />
+<<<<<<< Updated upstream
+=======
+      <workItem from="1620760606446" duration="2464000" />
+>>>>>>> Stashed changes
     </task>
     <servers />
   </component>
@@ -88,5 +92,9 @@
         </entry>
       </map>
     </option>
+<<<<<<< Updated upstream
+=======
+    <option name="oldMeFiltersMigrated" value="true" />
+>>>>>>> Stashed changes
   </component>
 </project>

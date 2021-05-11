@@ -4,16 +4,14 @@ class Player extends Phaser.Physics.Arcade.Sprite{
         super(scene, x, y, "player")
         scene.add.existing(this)
         scene.physics.add.existing(this)
-
-        this.setCollideWorldBounds(true)
-        this.setBounce(0.3);
+        this.setCollideWorldBounds(true);
         this.setGravityY(700)
         this.setFriction(1,1);
 
-        this.setBodySize(this.body.width-6,this.body.height-10);
-        this.setOffset(3, 10);
+        this.setDisplaySize(116,319);
+        this.setOffset(0,550);
 
-        this.anims.create({
+        /*this.anims.create({
             key: 'left',
             frames: this.anims.generateFrameNumbers('player', { start: 0, end: 3 }),
             frameRate: 10,
@@ -30,7 +28,7 @@ class Player extends Phaser.Physics.Arcade.Sprite{
             key: 'turn',
             frames: [ { key: 'player', frame: 4 } ],
             frameRate: 20
-        });
+        });*/
 
         this._directionX=0;
         this._directionY=0;
@@ -82,15 +80,15 @@ class Player extends Phaser.Physics.Arcade.Sprite{
         switch (true){
             case this._directionX<0:
                 this.setVelocityX(-160);
-                this.anims.play('left', true);
+                //this.anims.play('left', true);
                 break;
             case this._directionX>0:
                 this.setVelocityX(160);
-                this.anims.play('right', true);
+                //this.anims.play('right', true);
                 break;
             default:
                 this.setVelocityX(0);
-                this.anims.play('turn');
+                //this.anims.play('turn');
         }
 
         if(this._directionY<0){

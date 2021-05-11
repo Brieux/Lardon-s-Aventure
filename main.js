@@ -1,5 +1,9 @@
 
+<<<<<<< Updated upstream
 let width=4961; //896;
+=======
+let width=1654; //896;
+>>>>>>> Stashed changes
 let height=964; //448;
 var vid;
 var ennemis = [];

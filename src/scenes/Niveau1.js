@@ -3,11 +3,19 @@ class Niveau1 extends Tableau{
     preload() {
         super.preload();
         this.load.image('star', 'assets/star.png');
+<<<<<<< Updated upstream
         this.load.image('monster-violet', 'assets/ennemi2.png');
         this.load.image('monstre2', 'assets/ennemi.png');
         this.load.image('ground', 'assets/platform.png');;
         this.load.image('sol', 'assets/BackGround1.png');
         this.load.image('fond', 'assets/Background2.png');
+=======
+        this.load.image('monster-violet', 'assets/enmi1.png');
+        this.load.image('monstre2', 'assets/enmi1.png');
+        this.load.image('ground', 'assets/platform.png');;
+        this.load.image('sol', 'assets/BackGround1_0000_Calque-2.png');
+        this.load.image('fond', 'assets/assets/Background2_0001_Calque 2.jpg');
+>>>>>>> Stashed changes
         this.load.video('intro', 'assets/intro.mp4','loadeddata', false, true);
     }
 
@@ -24,7 +32,11 @@ class Niveau1 extends Tableau{
         /////////////////////////////////////////////// La BASE DU NIVEAU /////////////////////////////////////
 
         //on définit la taille du tableau
+<<<<<<< Updated upstream
         let largeurDuTableau=4961;
+=======
+        let largeurDuTableau=1654;
+>>>>>>> Stashed changes
         let hauteurDuTableau=964; //la hauteur est identique au cadre du jeu
         this.cameras.main.setBounds(0, 0, largeurDuTableau, hauteurDuTableau);
         this.physics.world.setBounds(0, 0, largeurDuTableau,  hauteurDuTableau);
@@ -38,7 +50,11 @@ class Niveau1 extends Tableau{
         this.sky=this.add.tileSprite(
             0,
             0,
+<<<<<<< Updated upstream
             4961,
+=======
+            1654,
+>>>>>>> Stashed changes
             964,
             'fond'
         );
@@ -48,8 +64,13 @@ class Niveau1 extends Tableau{
         //on ajoute une deuxième couche de ciel
         this.sky2=this.add.tileSprite(
             0,
+<<<<<<< Updated upstream
             0,
             4961,
+=======
+            242,
+            1654,
+>>>>>>> Stashed changes
             964,
             'sol'
         );
@@ -76,7 +97,7 @@ class Niveau1 extends Tableau{
 
         criquet = new monstreviolet(this,450,200);
         ennemis[1] = criquet;
-
+    /*
         //plateformes
         let plate = this.physics.add.staticGroup();
         plate.create(0, 300, 'ground');
@@ -97,7 +118,7 @@ class Niveau1 extends Tableau{
         this.physics.add.collider(this.player, plate);
         this.physics.add.collider(this.star1, plate);
         this.physics.add.collider(cafard, plate);
-        this.physics.add.collider(criquet, plate);
+        this.physics.add.collider(criquet, plate);*/
 
 
 
