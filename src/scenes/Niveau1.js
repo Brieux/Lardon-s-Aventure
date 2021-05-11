@@ -5,11 +5,9 @@ class Niveau1 extends Tableau{
         this.load.image('star', 'assets/star.png');
         this.load.image('monster-violet', 'assets/ennemi2.png');
         this.load.image('monstre2', 'assets/ennemi.png');
-        this.load.image('ground', 'assets/platform.png');
-        this.load.image('first', 'assets/poteau.png');
-        this.load.image('sol', 'assets/quai1.png');
-        this.load.image('train', 'assets/train.png');
-        this.load.image('fond', 'assets/quai2.png');
+        this.load.image('ground', 'assets/platform.png');;
+        this.load.image('sol', 'assets/BackGround1.png');
+        this.load.image('fond', 'assets/Background2.png');
         this.load.video('intro', 'assets/intro.mp4','loadeddata', false, true);
     }
 
@@ -21,13 +19,13 @@ class Niveau1 extends Tableau{
         vid.play(true);
         vid.setDepth(40);
         vid.setLoop(false);
-        //vid.setCurrentTime(vid.getDuration());
+        vid.setCurrentTime(vid.getDuration());
 
         /////////////////////////////////////////////// La BASE DU NIVEAU /////////////////////////////////////
 
         //on définit la taille du tableau
-        let largeurDuTableau=2000;
-        let hauteurDuTableau=450; //la hauteur est identique au cadre du jeu
+        let largeurDuTableau=4961;
+        let hauteurDuTableau=964; //la hauteur est identique au cadre du jeu
         this.cameras.main.setBounds(0, 0, largeurDuTableau, hauteurDuTableau);
         this.physics.world.setBounds(0, 0, largeurDuTableau,  hauteurDuTableau);
 
@@ -40,52 +38,26 @@ class Niveau1 extends Tableau{
         this.sky=this.add.tileSprite(
             0,
             0,
-            this.sys.canvas.width,
-            this.sys.canvas.height,
+            4961,
+            964,
             'fond'
         );
         this.sky.setOrigin(0,0);
         this.sky.setScrollFactor(0);//fait en sorte que le ciel ne suive pas la caméra
 
-        this.sky3=this.add.tileSprite(
-          0,
-          65,
-          this.sys.canvas.width,
-          this.sys.canvas.height,
-          'train'
-        );
-        this.sky3.setScrollFactor(0);
-        this.sky3.setOrigin(0,0);
-        this.sky3.alpha=1;
         //on ajoute une deuxième couche de ciel
         this.sky2=this.add.tileSprite(
             0,
             0,
-            this.sys.canvas.width,
-            this.sys.canvas.height,
+            4961,
+            964,
             'sol'
         );
         this.sky2.setScrollFactor(0);
         this.sky2.setOrigin(0,0);
         this.sky2.alpha=1;
 
-        this.foreground=this.add.tileSprite(
-            0,
-            0,
-            this.sys.canvas.width,
-            this.sys.canvas.height,
-            'first'
-        );
-        this.foreground.setScrollFactor(0);
-        this.foreground.setOrigin(0,0);
-        this.foreground.alpha=1;
-        this.foreground.setDepth(20);
-
-
         this.player.setDepth(10);
-
-
-
 
         //des étoiles
         this.star1=this.physics.add.sprite(1900,100,"star");
@@ -138,18 +110,17 @@ class Niveau1 extends Tableau{
         super.update();
         this.player.powerUp(this, time, delta);
         //le ciel se déplace moins vite que la caméra pour donner un effet paralax
-        this.foreground.tilePositionX=this.cameras.main.scrollX*1.2;
         this.sky2.tilePositionX=this.cameras.main.scrollX*0.6;
-
-        this.sky3.tilePositionX = this.cameras.main.scrollX*0.3+500;
         //le deuxième ciel se déplace moins vite pour accentuer l'effet
         this.sky.tilePositionX=this.cameras.main.scrollX*0.3+500;
+
         if (vid.getCurrentTime() == vid.getDuration()){
           vid.alpha -= 0.1;
         }
         if (vid.getCurrentTime() != vid.getDuration()){
           this.player.stop();
         }
+
         cafard.update();
         criquet.update();
         //console.log(cafard);
