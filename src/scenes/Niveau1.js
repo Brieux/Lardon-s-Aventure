@@ -7,8 +7,9 @@ class Niveau1 extends Tableau{
         this.load.image('monster-violet', 'assets/enmi1.png');
         this.load.image('monstre2', 'assets/enmi1.png');
         this.load.image('ground', 'assets/platform.png');;
-        this.load.image('sol', 'assets/BackGround1_0000_Calque-2.png');
+        this.load.image('sol', 'assets/BackGround1.png');
         this.load.image('fond', 'assets/assets/Background2_0001_Calque 2.jpg');
+
         this.load.video('intro', 'assets/intro.mp4','loadeddata', false, true);
     }
 
@@ -20,13 +21,13 @@ class Niveau1 extends Tableau{
         vid.play(true);
         vid.setDepth(40);
         vid.setLoop(false);
-        //vid.setCurrentTime(vid.getDuration());
+        vid.setCurrentTime(vid.getDuration());
 
         /////////////////////////////////////////////// La BASE DU NIVEAU /////////////////////////////////////
 
         //on définit la taille du tableau
 
-        let largeurDuTableau=1654;
+        let largeurDuTableau=7150;
         let hauteurDuTableau=964; //la hauteur est identique au cadre du jeu
         this.cameras.main.setBounds(0, 0, largeurDuTableau, hauteurDuTableau);
         this.physics.world.setBounds(0, 0, largeurDuTableau,  hauteurDuTableau);
@@ -40,27 +41,25 @@ class Niveau1 extends Tableau{
         this.sky=this.add.tileSprite(
             0,
             0,
-
             1654,
-
             964,
             'fond'
         );
         this.sky.setOrigin(0,0);
-        this.sky.setScrollFactor(0);//fait en sorte que le ciel ne suive pas la caméra
+        this.sky.setScrollFactor(0);
 
         //on ajoute une deuxième couche de ciel
         this.sky2=this.add.tileSprite(
             0,
-
-            242,
-            1654,
+            0,
+            4961,
             964,
             'sol'
         );
         this.sky2.setScrollFactor(0);
         this.sky2.setOrigin(0,0);
         this.sky2.alpha=1;
+
 
         this.player.setDepth(10);
 
@@ -103,12 +102,6 @@ class Niveau1 extends Tableau{
         this.physics.add.collider(this.star1, plate);
         this.physics.add.collider(cafard, plate);
         this.physics.add.collider(criquet, plate);*/
-
-
-
-
-
-
     }
 
     update(time, delta){
@@ -131,7 +124,4 @@ class Niveau1 extends Tableau{
         //console.log(cafard);
 
     }
-
-
-
 }
