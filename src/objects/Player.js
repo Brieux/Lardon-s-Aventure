@@ -5,11 +5,12 @@ class Player extends Phaser.Physics.Arcade.Sprite{
         scene.add.existing(this)
         scene.physics.add.existing(this)
         this.setCollideWorldBounds(true);
-        this.setGravityY(700)
+        this.setGravityY(0);
+        this.body.setAllowGravity(false);
         this.setFriction(1,1);
-
         this.setDisplaySize(116,319);
-        this.setOffset(0,550);
+        this.setOffset(0,0);
+        this.setVelocityY(0);
 
         /*this.anims.create({
             key: 'left',
@@ -91,17 +92,27 @@ class Player extends Phaser.Physics.Arcade.Sprite{
                 //this.anims.play('turn');
         }
 
-        if(this._directionY<0){
-            if(this.body.blocked.down || this.body.touching.down){
+        if(this._directionY > 0 ){
+            this.y += 10;
+        }
+        if(this._directionY < 0 && this.y > 600){
+            this.y -= 10;
+        }
+
+        if(this.scene.input.keyboard.addKey('SPACE').isDown){
+            if(this.y > 600) {
                 this.setVelocityY(-550);
+                console.log("1245");
             }
         }
+        this.scene.input.keyboard.addKey('SPACE').onUp(this.setVelocityY(500));
+
       }
 
       powerUp(scene, time, delta){
         //console.log(scene);
         //console.log(time, delta);
-        this.dashUse = scene.input.keyboard.addKey('SPACE');
+        this.dashUse = scene.input.keyboard.addKey('A');
         this.attackUse = scene.input.keyboard.addKey('Z');
         this.rangeUse = scene.input.keyboard.addKey('E');
 

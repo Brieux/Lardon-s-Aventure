@@ -75,7 +75,7 @@ class Niveau1 extends Tableau{
         this.physics.add.collider(this.player,this.platforms);
 
         //Monstres
-        cafard = new monstre2(this,400,100);
+        cafard = new monstre2(this,400,800);
         ennemis[0] = cafard;
 
         criquet = new monstreviolet(this,450,200);
