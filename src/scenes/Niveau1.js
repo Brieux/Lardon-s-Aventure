@@ -89,6 +89,12 @@ class Niveau1 extends Tableau{
             child.visible = false;
             child.refreshBody();});
         this.physics.add.collider(this.player, plate);
+        let debug=this.add.graphics().setAlpha(this.game.config.physics.arcade.debug?0.75:0);
+        this.player.renderDebug(debug,{
+            tileColor: null, // Couleur des tiles qui ne collident pas
+            collidingTileColor: new Phaser.Display.Color(0, 255, 0, 255), //Couleur des tiles qui collident
+            faceColor: null // Color of colliding face edges
+        });
     /*
         //plateformes
 
@@ -124,7 +130,7 @@ class Niveau1 extends Tableau{
             this.sky2.setTexture('solMatrix');
             this.sky.setTexture('fondMatrix');
             this.player.setTexture('persoMatrix');
-            game.debug = true;
+            this.debug = true;
             //cafard.body.enable = false;
             //criquet.body.enable = false;
             this.player.body.enable = false;
