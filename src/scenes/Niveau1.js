@@ -106,6 +106,7 @@ class Niveau1 extends Tableau{
 
     update(time, delta){
         super.update();
+        this.player.move(this,time, delta);
         this.player.powerUp(this, time, delta);
         //le ciel se déplace moins vite que la caméra pour donner un effet paralax
         this.sky2.tilePositionX=this.cameras.main.scrollX*0.6;

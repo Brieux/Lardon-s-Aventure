@@ -38,9 +38,8 @@ class Tableau extends Phaser.Scene{
 
 
     }
-    update(){
+    update(time, delta){
         super.update();
-        this.player.move();
 
     }
 

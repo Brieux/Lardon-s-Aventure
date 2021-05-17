@@ -11,6 +11,9 @@ class Player extends Phaser.Physics.Arcade.Sprite{
         this.setDisplaySize(116,319);
         this.setOffset(0,0);
         this.setVelocityY(0);
+        this.onAir = false;
+        this.saveY =0;
+
 
         /*this.anims.create({
             key: 'left',
@@ -60,6 +63,15 @@ class Player extends Phaser.Physics.Arcade.Sprite{
 
     }
 
+    clamped(yes){
+        if(yes){
+            this.y = Phaser.Math.Clamp(this.y, 599,900);
+        }
+        else{
+            this.y = Phaser.Math.Clamp(this.y, 0 , 900) ;
+        }
+    }
+
     /**
      * arrête le joueur
      */
@@ -73,9 +85,10 @@ class Player extends Phaser.Physics.Arcade.Sprite{
     /**
      * Déplace le joueur en fonction des directions données
      */
-    move(){
+    move(scene, time, delta){
         var posX = this.x / 64;
         var posY = this.y;
+
         posX = Math.trunc(posX);
         //console.log("sur la case numero : " + posX);
         switch (true){
@@ -93,20 +106,41 @@ class Player extends Phaser.Physics.Arcade.Sprite{
         }
 
         if(this._directionY > 0 ){
-            this.y += 10;
-        }
-        if(this._directionY < 0 && this.y > 600){
-            this.y -= 10;
-        }
-
-        if(this.scene.input.keyboard.addKey('SPACE').isDown){
-            if(this.y > 600) {
-                this.setVelocityY(-550);
-                console.log("1245");
+            if(!this.onAir){
+                this.y += 10;
             }
         }
-        this.scene.input.keyboard.addKey('SPACE').onUp(this.setVelocityY(500));
+        if(this._directionY < 0){
+            if(!this.onAir){
+                this.y -= 10;
+                this.clamped(true);
+            }
 
+        }
+
+        if(this.scene.input.keyboard.addKey("SPACE").isDown){
+            if (this.onAir == false){
+                this.saveY = this.y;
+                this.body.setAllowGravity(true);
+                this.setVelocityY(-400);
+                this.onAir = true;
+                this.clamped(false);
+            }
+
+
+        }/*
+        if ((!this.scene.input.keyboard.addKey("SPACE").isDown)&&(this.onAir)&&(this.saveY > this.y)){
+            console.log(Math.sin(delta));
+            //this.setVelocityY(800);
+        }*/
+
+        if(this.saveY < this.y){
+            this.setVelocityY(0);
+            this.body.setAllowGravity(false);
+            this.onAir = false;
+
+
+        }
       }
 
       powerUp(scene, time, delta){
