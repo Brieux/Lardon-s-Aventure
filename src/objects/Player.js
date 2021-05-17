@@ -12,7 +12,7 @@ class Player extends Phaser.Physics.Arcade.Sprite{
         this.setOffset(0,0);
         this.setVelocityY(0);
         this.onAir = false;
-        this.saveY =0;
+        this.saveY =this.scene.height;
 
 
         /*this.anims.create({
@@ -63,12 +63,12 @@ class Player extends Phaser.Physics.Arcade.Sprite{
 
     }
 
-    clamped(yes){
-        if(yes){
+    clamped(Active){
+        if(Active){
             this.y = Phaser.Math.Clamp(this.y, 599,900);
         }
         else{
-            this.y = Phaser.Math.Clamp(this.y, 0 , 900) ;
+            this.y = Phaser.Math.Clamp(this.y, 0 , this.saveY) ;
         }
     }
 
@@ -88,16 +88,15 @@ class Player extends Phaser.Physics.Arcade.Sprite{
     move(scene, time, delta){
         var posX = this.x / 64;
         var posY = this.y;
-
         posX = Math.trunc(posX);
         //console.log("sur la case numero : " + posX);
         switch (true){
             case this._directionX<0:
-                this.setVelocityX(-450);
+                this.setVelocityX(-550);
                 //this.anims.play('left', true);
                 break;
             case this._directionX>0:
-                this.setVelocityX(450);
+                this.setVelocityX(550);
                 //this.anims.play('right', true);
                 break;
             default:
@@ -117,29 +116,26 @@ class Player extends Phaser.Physics.Arcade.Sprite{
             }
 
         }
-
         if(this.scene.input.keyboard.addKey("SPACE").isDown){
             if (this.onAir == false){
                 this.saveY = this.y;
                 this.body.setAllowGravity(true);
-                this.setVelocityY(-400);
+                this.setVelocityY(-1500);
+                this.setGravityY(2100);
                 this.onAir = true;
                 this.clamped(false);
             }
-
-
         }/*
         if ((!this.scene.input.keyboard.addKey("SPACE").isDown)&&(this.onAir)&&(this.saveY > this.y)){
             console.log(Math.sin(delta));
             //this.setVelocityY(800);
         }*/
-
-        if(this.saveY < this.y){
-            this.setVelocityY(0);
-            this.body.setAllowGravity(false);
-            this.onAir = false;
-
-
+        if(this.saveY < this.y && this.onAir){
+                this.setVelocityY(0);
+                this.body.setAllowGravity(false);
+                this.setGravityY(0);
+                this.onAir = false;
+                this.clamped(false);
         }
       }
 
