@@ -3,7 +3,6 @@ class Niveau1 extends Tableau{
     preload() {
         super.preload();
         this.load.image('star', 'assets/star.png');
-
         this.load.image('monster-violet', 'assets/enmi1.png');
         this.load.image('monstre2', 'assets/enmi1.png');
         this.load.image('ground', 'assets/platform.png');;
@@ -12,8 +11,9 @@ class Niveau1 extends Tableau{
         this.load.image('solMatrix', 'assets/BackGround1_matrix.png');
         this.load.image('fondMatrix', 'assets/backGround_Matrix.jpg');
         this.load.video('intro', 'assets/intro.mp4','loadeddata', false, true);
-        this.load.image('persoMatrix', 'assets/skinMatrix3.png');
+        this.load.image('persoMatrix', 'assets/skinMatrix.png');
         this.load.image('persoNormal', 'assets/player.png');
+        this.load.image('tonneau', 'assets/tonneau.png');
     }
 
     create() {
@@ -66,27 +66,32 @@ class Niveau1 extends Tableau{
 
         this.player.setDepth(10);
 
-        //des étoiles
-        this.star1=this.physics.add.sprite(1900,100,"star");
-        this.star1.setCollideWorldBounds(true);
-        this.star1.setBounce(1);
-
-
         this.physics.add.overlap(this.player, this.star1, this.ramasserEtoile, null, this);
 
 
         this.physics.add.collider(this.player,this.platforms);
 
         //Monstres
-        cafard = new monstre2(this,400,800);
+        /*cafard = new monstre2(this,400,800);
         ennemis[0] = cafard;
 
         criquet = new monstreviolet(this,450,200);
-        ennemis[1] = criquet;
+        ennemis[1] = criquet;*/
+        let plate = this.physics.add.staticGroup();
+        plate.create(0,775);
+        plate.children.entries[0].setDisplaySize(1210,10);
+        plate.create(1600,775);
+        plate.children.entries[1].setDisplaySize(2100,10);
+
+
+        plate.children.iterate(function (child) {
+            child.setOrigin(0,0);
+            child.visible = false;
+            child.refreshBody();});
+        this.physics.add.collider(this.player, plate);
     /*
         //plateformes
-        let plate = this.physics.add.staticGroup();
-        plate.create(0, 300, 'ground');
+
         plate.create(130 , 250, 'ground');
         plate.create(200, 200, 'ground');
         plate.create(410, 140, 'ground');
@@ -108,13 +113,19 @@ class Niveau1 extends Tableau{
     }
 
     update(time, delta){
-        super.update();
+        super.update()
+        if(this.player.y > 775){
+            this.player.isDead=true;
+            this.player.visible=false;
+            this.player.isDead=false;
+            this.scene.restart();
+        }
         if(super.getMatrix() && super.getAvailable()){
             this.sky2.setTexture('solMatrix');
             this.sky.setTexture('fondMatrix');
             this.player.setTexture('persoMatrix');
-            cafard.body.enable = false;
-            criquet.body.enable = false;
+            //cafard.body.enable = false;
+            //criquet.body.enable = false;
             this.player.body.enable = false;
 
         }
@@ -122,8 +133,8 @@ class Niveau1 extends Tableau{
             this.sky2.setTexture('sol');
             this.sky.setTexture('fond');
             this.player.setTexture('persoNormal');
-            cafard.body.enable = true;
-            criquet.body.enable = true;
+            //cafard.body.enable = true;
+            //criquet.body.enable = true;
             this.player.body.enable = true;
 
         }
@@ -131,7 +142,7 @@ class Niveau1 extends Tableau{
             this.player.move(this, time, delta);
             this.player.powerUp(this, time, delta);
             //le ciel se déplace moins vite que la caméra pour donner un effet paralax
-            this.sky2.tilePositionX = this.cameras.main.scrollX * 0.6;
+            this.sky2.tilePositionX = this.cameras.main.scrollX;
             //le deuxième ciel se déplace moins vite pour accentuer l'effet
             this.sky.tilePositionX = this.cameras.main.scrollX * 0.3 + 500;
 
@@ -142,8 +153,8 @@ class Niveau1 extends Tableau{
                 this.player.stop();
             }
 
-            cafard.update();
-            criquet.update();
+            //cafard.update();
+            //criquet.update();
 
             //console.log(cafard);
         }

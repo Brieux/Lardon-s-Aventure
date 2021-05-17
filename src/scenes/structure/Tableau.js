@@ -11,6 +11,7 @@ class Tableau extends Phaser.Scene{
         super(key);
         this.matrix = false;
         this.chgtAvailable = true;
+
     }
 
     getMatrix(){
@@ -43,7 +44,9 @@ class Tableau extends Phaser.Scene{
          * Le joueur
          * @type {Player}
          */
-        this.player=new Player(this,0,700);
+
+
+        this.player=new Player(this,0,600);
 
 
     }

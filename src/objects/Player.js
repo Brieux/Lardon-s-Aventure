@@ -5,8 +5,8 @@ class Player extends Phaser.Physics.Arcade.Sprite{
         scene.add.existing(this)
         scene.physics.add.existing(this)
         this.setCollideWorldBounds(true);
-        this.setGravityY(0);
-        this.body.setAllowGravity(false);
+        this.setGravityY(1500);
+        this.body.setAllowGravity(true);
         this.setFriction(1,1);
         this.setDisplaySize(116,319);
         this.setOffset(0,0);
@@ -63,14 +63,6 @@ class Player extends Phaser.Physics.Arcade.Sprite{
 
     }
 
-    clamped(Active){
-        if(Active){
-            this.y = Phaser.Math.Clamp(this.y, 599,900);
-        }
-        else{
-            this.y = Phaser.Math.Clamp(this.y, 0 , this.saveY) ;
-        }
-    }
 
     /**
      * arrête le joueur
@@ -102,37 +94,14 @@ class Player extends Phaser.Physics.Arcade.Sprite{
                 this.setVelocityX(0);
                 //this.anims.play('turn');
         }
-
-        if(this._directionY > 0 ){
-            if(!this.onAir){
-                this.y += 10;
+        if(this._directionY < 0)
+        {
+            if(this.body.blocked.down)
+            {
+                this.setVelocityY(-1200);
             }
         }
-        if(this._directionY < 0){
-            if(!this.onAir){
-                this.y -= 10;
-                this.clamped(true);
-            }
-
-        }
-        if(this.scene.input.keyboard.addKey("SPACE").isDown) {
-            if (this.onAir == false) {
-                this.saveY = this.y;
-                this.body.setAllowGravity(true);
-                this.setVelocityY(-1500);
-                this.setGravityY(2100);
-                this.onAir = true;
-                this.clamped(false);
-            }
-        }
-        if(this.saveY < this.y && this.onAir){
-                this.setVelocityY(0);
-                this.body.setAllowGravity(false);
-                this.setGravityY(0);
-                this.onAir = false;
-                this.clamped(false);
-        }
-      }
+    }
 
       powerUp(scene, time, delta){
         this.dashUse = scene.input.keyboard.addKey('A');
@@ -163,6 +132,7 @@ class Player extends Phaser.Physics.Arcade.Sprite{
           else {
           }
         }
+
         if (this.dashAvailable == false){
           this.delayDash -= delta;
           if (this.delayDash < 0){
@@ -170,6 +140,8 @@ class Player extends Phaser.Physics.Arcade.Sprite{
             this.delayDash = this.dashBasic;
           }
         }
+
+
           //Range
           if (this.rangeUse.isDown){
               if(this.rangeAvailable){
@@ -179,6 +151,7 @@ class Player extends Phaser.Physics.Arcade.Sprite{
               else {
               }
           }
+
           if (this.rangeAvailable == false){
               this.delayRange -= delta;
               if (this.delayRange < 0){
@@ -191,6 +164,7 @@ class Player extends Phaser.Physics.Arcade.Sprite{
       dash(){ // la vitesse est la pour le dash //target est la cible du dash
         var posX = this.x / 64;
         posX = Math.trunc(posX);
+
         var target;
         if (this._directionX > 0){
           target = posX + 8;
@@ -224,6 +198,7 @@ class Player extends Phaser.Physics.Arcade.Sprite{
                       }
                   }
               }
+
               if (this._directionX < 0) {
                   console.log("gauche");
                   if (ennemis[i].x < this.x) {
@@ -235,7 +210,6 @@ class Player extends Phaser.Physics.Arcade.Sprite{
               }
           }
       }
-
       range(){
         console.log("Salut");
       }
