@@ -107,31 +107,42 @@ class Niveau1 extends Tableau{
 
     update(time, delta){
         super.update();
-        this.player.move(this,time, delta);
-        this.player.powerUp(this, time, delta);
-        //le ciel se déplace moins vite que la caméra pour donner un effet paralax
-        this.sky2.tilePositionX=this.cameras.main.scrollX*0.6;
-        //le deuxième ciel se déplace moins vite pour accentuer l'effet
-        this.sky.tilePositionX=this.cameras.main.scrollX*0.3+500;
-
-        if (vid.getCurrentTime() == vid.getDuration()){
-          vid.alpha -= 0.1;
-        }
-        if (vid.getCurrentTime() != vid.getDuration()){
-          this.player.stop();
-        }
-
-        cafard.update();
-        criquet.update();
         if(super.getMatrix() && super.getAvailable()){
             this.sky2.setTexture('solMatrix');
             this.sky.setTexture('fondMatrix');
+            cafard.body.enable = false;
+            criquet.body.enable = false;
+            this.player.body.enable = false;
+
         }
         else {
             this.sky2.setTexture('sol');
             this.sky.setTexture('fond');
-        }
-        //console.log(cafard);
+            cafard.body.enable = true;
+            criquet.body.enable = true;
+            this.player.body.enable = true;
 
+        }
+        if(!super.getMatrix()) {
+            this.player.move(this, time, delta);
+            this.player.powerUp(this, time, delta);
+            //le ciel se déplace moins vite que la caméra pour donner un effet paralax
+            this.sky2.tilePositionX = this.cameras.main.scrollX * 0.6;
+            //le deuxième ciel se déplace moins vite pour accentuer l'effet
+            this.sky.tilePositionX = this.cameras.main.scrollX * 0.3 + 500;
+
+            if (vid.getCurrentTime() == vid.getDuration()) {
+                vid.alpha -= 0.1;
+            }
+            if (vid.getCurrentTime() != vid.getDuration()) {
+                this.player.stop();
+            }
+
+            cafard.update();
+            criquet.update();
+
+            //console.log(cafard);
+        }
     }
 }
+
