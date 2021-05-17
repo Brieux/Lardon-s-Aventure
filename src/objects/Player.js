@@ -87,7 +87,6 @@ class Player extends Phaser.Physics.Arcade.Sprite{
      */
     move(scene, time, delta){
         var posX = this.x / 64;
-        var posY = this.y;
         posX = Math.trunc(posX);
         //console.log("sur la case numero : " + posX);
         switch (true){
@@ -116,8 +115,8 @@ class Player extends Phaser.Physics.Arcade.Sprite{
             }
 
         }
-        if(this.scene.input.keyboard.addKey("SPACE").isDown){
-            if (this.onAir == false){
+        if(this.scene.input.keyboard.addKey("SPACE").isDown) {
+            if (this.onAir == false) {
                 this.saveY = this.y;
                 this.body.setAllowGravity(true);
                 this.setVelocityY(-1500);
@@ -125,11 +124,7 @@ class Player extends Phaser.Physics.Arcade.Sprite{
                 this.onAir = true;
                 this.clamped(false);
             }
-        }/*
-        if ((!this.scene.input.keyboard.addKey("SPACE").isDown)&&(this.onAir)&&(this.saveY > this.y)){
-            console.log(Math.sin(delta));
-            //this.setVelocityY(800);
-        }*/
+        }
         if(this.saveY < this.y && this.onAir){
                 this.setVelocityY(0);
                 this.body.setAllowGravity(false);
@@ -140,12 +135,9 @@ class Player extends Phaser.Physics.Arcade.Sprite{
       }
 
       powerUp(scene, time, delta){
-        //console.log(scene);
-        //console.log(time, delta);
         this.dashUse = scene.input.keyboard.addKey('A');
         this.attackUse = scene.input.keyboard.addKey('Z');
         this.rangeUse = scene.input.keyboard.addKey('E');
-
 
         //attack cac
         if (this.attackUse.isDown){
@@ -154,74 +146,51 @@ class Player extends Phaser.Physics.Arcade.Sprite{
             this.attackCac();
             this.cacAvailable = false;
           }
-          else {
-            //console.log("Attaque non utilisable"); //on peut rien faire
-          }
         }
         if (this.cacAvailable == false){
-          //console.log("recharge"); //on attends
           this.delayCac -= delta;
           if (this.delayCac < 0){
-            //console.log("attaque recup"); //on recup
             this.cacAvailable = true;
             this.delayCac = this.cacBasic;
           }
         }
-
-
-
-
         //dash
         if (this.dashUse.isDown){
           if(this.dashAvailable){
-            //console.log("coucou"); //On fait un truc
             this.dash();
             this.dashAvailable = false;
           }
           else {
-            //console.log("Sort non utilisable"); //on peut rien faire
           }
         }
-
         if (this.dashAvailable == false){
-          //console.log("recharge"); //on attends
           this.delayDash -= delta;
           if (this.delayDash < 0){
-            //console.log("Sort recup"); //on recup
             this.dashAvailable = true;
             this.delayDash = this.dashBasic;
           }
         }
-
-
           //Range
           if (this.rangeUse.isDown){
               if(this.rangeAvailable){
-                  //console.log("coucou"); //On fait un truc
                   this.range();
                   this.rangeAvailable = false;
               }
               else {
-                  //console.log("Sort non utilisable"); //on peut rien faire
               }
           }
-
           if (this.rangeAvailable == false){
-              //console.log("recharge"); //on attends
               this.delayRange -= delta;
               if (this.delayRange < 0){
-                  //console.log("Sort recup"); //on recup
                   this.rangeAvailable = true;
                   this.delayRange = this.rangeBasic;
               }
           }
-        //console.log(this.dashUse.isDown, this.dashAvailable, this.delayDash, this.dashBasic);
       }
 
       dash(){ // la vitesse est la pour le dash //target est la cible du dash
         var posX = this.x / 64;
         posX = Math.trunc(posX);
-
         var target;
         if (this._directionX > 0){
           target = posX + 8;
@@ -255,7 +224,6 @@ class Player extends Phaser.Physics.Arcade.Sprite{
                       }
                   }
               }
-
               if (this._directionX < 0) {
                   console.log("gauche");
                   if (ennemis[i].x < this.x) {
@@ -267,6 +235,7 @@ class Player extends Phaser.Physics.Arcade.Sprite{
               }
           }
       }
+
       range(){
         console.log("Salut");
       }

@@ -9,7 +9,8 @@ class Niveau1 extends Tableau{
         this.load.image('ground', 'assets/platform.png');;
         this.load.image('sol', 'assets/BackGround1.png');
         this.load.image('fond', 'assets/assets/Background2_0001_Calque 2.jpg');
-
+        this.load.image('solMatrix', 'assets/BackGround1_matrix.png');
+        this.load.image('fondMatrix', 'assets/backGround_Matrix.jpg');
         this.load.video('intro', 'assets/intro.mp4','loadeddata', false, true);
     }
 
@@ -122,6 +123,14 @@ class Niveau1 extends Tableau{
 
         cafard.update();
         criquet.update();
+        if(super.getMatrix() && super.getAvailable()){
+            this.sky2.setTexture('solMatrix');
+            this.sky.setTexture('fondMatrix');
+        }
+        else {
+            this.sky2.setTexture('sol');
+            this.sky.setTexture('fond');
+        }
         //console.log(cafard);
 
     }
