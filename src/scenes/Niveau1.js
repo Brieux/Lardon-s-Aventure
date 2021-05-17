@@ -124,6 +124,7 @@ class Niveau1 extends Tableau{
             this.sky2.setTexture('solMatrix');
             this.sky.setTexture('fondMatrix');
             this.player.setTexture('persoMatrix');
+            game.debug = true;
             //cafard.body.enable = false;
             //criquet.body.enable = false;
             this.player.body.enable = false;
