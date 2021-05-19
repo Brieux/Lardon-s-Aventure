@@ -1,11 +1,19 @@
 class Ui extends Phaser.Scene{
+
+
     constructor ()
     {
         super({ key: 'ui', active: true });
         window.ui=this;
+        let si;
+        let container;
+
     }
     preload(){
         this.load.image('ui/full-screen-icon', 'assets/ui/full-screen.png');
+        this.load.image('if', 'assets/if.jpg');
+        this.load.image('container', 'assets/if_containter.jpg');
+        this.load.image('true', 'assets/true.jpg');
     }
     create (){
         console.log("create Ui")
@@ -87,6 +95,30 @@ class Ui extends Phaser.Scene{
         btFs.x=this.sys.canvas.width;
         btFs.y=this.sys.canvas.height;
 
+
+
+        this.container = this.physics.add.sprite(500,500,'container');
+        this.container.setDisplaySize(125,125);
+        this.container.body.setAllowGravity(false);
+        this.container.setVisible(false);
+
+        this.si = this.physics.add.sprite(200,200,'if');
+        this.si.setDisplaySize(100,100);
+        this.si.body.setAllowGravity(false);
+        this.si.setVisible(false);
+        this.si.setInteractive();
+
+
+
+        this.input.enable(this.si);
+        this.input.setDraggable(this.si);
+
+
+        this.input.on('drag', function (pointer, gameObject, dragX, dragY) {
+            gameObject.x = dragX;
+            gameObject.y = dragY;
+
+        });
     }
 
     gagne(points=10)
@@ -95,9 +127,26 @@ class Ui extends Phaser.Scene{
         this._scoreText.setText('Score: ' + this.score);
     }
     update(){
-        if(Tableau.current){
+        if(Tableau.current) {
             this._tableauText.setText(Tableau.current.scene.key);
             this._tableauTextClass.setText(Tableau.current.constructor.name);
+            if (Tableau.current.getMatr() && Tableau.current.getAvail()) {
+                this.showHUD();
+            }
+            else{
+                this.hideHud();
+            }
         }
+    }
+
+    showHUD(){
+        this.si.setVisible(true);
+        this.container.setVisible(true);
+    }
+
+    hideHud(){
+        this.si.setVisible(false);
+        this.container.setVisible(false);
+        this.si.setPosition(200,200);
     }
 }

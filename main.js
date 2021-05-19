@@ -14,12 +14,11 @@ let config = {
         default: 'arcade',
         arcade: {
             gravity: { y: 100*3 },
-            debug: false,
+            debug: true,
         }
     },
     scene: [
         new Ui(),
-
         new Niveau1("Cliquez pour aller sur le niveau tile"),
         new tile("Niveau tile"),
         new Tableau08("Un plateau qui sort du cadre"),

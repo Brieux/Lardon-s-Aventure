@@ -130,9 +130,6 @@ class Niveau1 extends Tableau{
             this.sky2.setTexture('solMatrix');
             this.sky.setTexture('fondMatrix');
             this.player.setTexture('persoMatrix');
-            this.debug = true;
-            //cafard.body.enable = false;
-            //criquet.body.enable = false;
             this.player.body.enable = false;
 
         }
@@ -165,6 +162,14 @@ class Niveau1 extends Tableau{
 
             //console.log(cafard);
         }
+    }
+
+    getMatr(){
+        return super.getMatrix();
+    }
+
+    getAvail(){
+        return super.getAvailable();
     }
 }
 
