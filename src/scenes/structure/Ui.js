@@ -231,7 +231,7 @@ class Ui extends Phaser.Scene{
         if(this.dash.x == this.container.x){
             Tableau.current.player.dashUnlocked = true;
         }
-        
+
         this.dash.setVisible(false);
         this.jump.setVisible(false);
         this.trou.setVisible(false);
