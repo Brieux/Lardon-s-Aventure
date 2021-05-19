@@ -13,7 +13,7 @@ class Player extends Phaser.Physics.Arcade.Sprite{
         this.setVelocityY(0);
         this.onAir = false;
         this.saveY =this.scene.height;
-
+        this.dashUnlocked = false;
 
         /*this.anims.create({
             key: 'left',
@@ -124,23 +124,23 @@ class Player extends Phaser.Physics.Arcade.Sprite{
           }
         }
         //dash
-        if (this.dashUse.isDown){
-          if(this.dashAvailable){
-            this.dash();
-            this.dashAvailable = false;
-          }
-          else {
-          }
-        }
+        if(this.dashUnlocked) {
+            if (this.dashUse.isDown) {
+                if (this.dashAvailable) {
+                    this.dash();
+                    this.dashAvailable = false;
+                } else {
+                }
+            }
 
-        if (this.dashAvailable == false){
-          this.delayDash -= delta;
-          if (this.delayDash < 0){
-            this.dashAvailable = true;
-            this.delayDash = this.dashBasic;
-          }
+            if (this.dashAvailable == false) {
+                this.delayDash -= delta;
+                if (this.delayDash < 0) {
+                    this.dashAvailable = true;
+                    this.delayDash = this.dashBasic;
+                }
+            }
         }
-
 
           //Range
           if (this.rangeUse.isDown){

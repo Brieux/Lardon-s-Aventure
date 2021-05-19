@@ -148,6 +148,9 @@ class Ui extends Phaser.Scene{
     }
 
     hideHud(){
+        if(this.si.x == this.container.x){
+            Tableau.current.player.dashUnlocked = true;
+        }
         this.si.setVisible(false);
         this.container.setVisible(false);
         this.si.setPosition(200,200);
