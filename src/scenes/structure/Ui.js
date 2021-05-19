@@ -108,7 +108,10 @@ class Ui extends Phaser.Scene{
         this.si.setVisible(false);
         this.si.setInteractive();
 
-
+        let ici = this;
+        this.physics.add.overlap(this.si, this.container, function(){
+            ici.si.setPosition(ici.container.x, ici.container.y);
+        });
 
         this.input.enable(this.si);
         this.input.setDraggable(this.si);
