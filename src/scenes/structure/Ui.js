@@ -28,8 +28,6 @@ class Ui extends Phaser.Scene {
     }
 
     create() {
-        console.log("create Ui")
-
         this.score = 0;
         /**
          * Le champ texte du score
@@ -148,10 +146,8 @@ class Ui extends Phaser.Scene {
             ici.input.setDraggable(enfant);
             ici.boutons.forEach(function (child) {
                 if (enfant === child) {
-                    console.log("same");
                 } else {
                     ici.physics.add.collider(enfant, child, function () {
-                        console.log("collision bouton");
                     });
 
                 }
@@ -170,9 +166,6 @@ class Ui extends Phaser.Scene {
             });
         });
 
-        console.log(this.containers);
-        console.log(this.containersBool);
-        console.log(this.boutons);
 
         this.input.on('drag', function (pointer, gameObject, dragX, dragY) {
             gameObject.x = dragX;

@@ -17,24 +17,7 @@ class Player extends Phaser.Physics.Arcade.Sprite{
         this.jumpUnlocked = false;
         this.meleeUnlocked = false;
         this.ptsProg = -1;
-        /*this.anims.create({
-            key: 'left',
-            frames: this.anims.generateFrameNumbers('player', { start: 0, end: 3 }),
-            frameRate: 10,
-            repeat: -1
-        });
 
-        this.anims.create({
-            key: 'right',
-            frames: this.anims.generateFrameNumbers('player', { start: 5, end: 8 }),
-            frameRate: 10,
-            repeat: -1
-        });
-        this.anims.create({
-            key: 'turn',
-            frames: [ { key: 'player', frame: 4 } ],
-            frameRate: 20
-        });*/
 
         this._directionX=0;
         this._directionY=0;
@@ -49,10 +32,6 @@ class Player extends Phaser.Physics.Arcade.Sprite{
         this.cacBasic = 2000;
         this.delayCac = this.cacBasic;
 
-        //attack a distance
-        this.rangeAvailable = true;
-        this.rangeBasic = 2000;
-        this.delayRange = this.rangeBasic;
 
 
     }
@@ -108,7 +87,6 @@ class Player extends Phaser.Physics.Arcade.Sprite{
       powerUp(scene, time, delta){
         this.dashUse = scene.input.keyboard.addKey('A');
         this.attackUse = scene.input.keyboard.addKey('Z');
-        this.rangeUse = scene.input.keyboard.addKey('E');
 
         //attack cac
           if(this.meleeUnlocked) {
@@ -145,24 +123,6 @@ class Player extends Phaser.Physics.Arcade.Sprite{
                 }
             }
         }
-
-          //Range
-          if (this.rangeUse.isDown){
-              if(this.rangeAvailable){
-                  this.range();
-                  this.rangeAvailable = false;
-              }
-              else {
-              }
-          }
-
-          if (this.rangeAvailable == false){
-              this.delayRange -= delta;
-              if (this.delayRange < 0){
-                  this.rangeAvailable = true;
-                  this.delayRange = this.rangeBasic;
-              }
-          }
       }
 
       dash(){ // la vitesse est la pour le dash //target est la cible du dash
@@ -189,27 +149,6 @@ class Player extends Phaser.Physics.Arcade.Sprite{
                   }
               ]
           });
-/*
-        var posX = this.x / 64;
-        posX = Math.trunc(posX);
-
-        var target;
-        if (this._directionX > 0){
-          target = posX + 8;
-        }
-        else if (this._directionX < 0){
-          target = posX - 8;
-        }
-        else {
-          target = posX;
-        }
-
-          if (target > posX){
-            this.setVelocityX(8000);
-          }
-          else if (target < posX){
-            this.setVelocityX(-8000);
-        }*/
       }
 
       attackCac() {
@@ -238,9 +177,5 @@ class Player extends Phaser.Physics.Arcade.Sprite{
               }
           }
       }
-      range(){
-        console.log("Salut");
-      }
-
 
 }
