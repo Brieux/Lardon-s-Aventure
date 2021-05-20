@@ -14,7 +14,9 @@ class Player extends Phaser.Physics.Arcade.Sprite{
         this.onAir = false;
         this.saveY =this.scene.height;
         this.dashUnlocked = false;
-
+        this.jumpUnlocked = false;
+        this.meleeUnlocked = false;
+        this.ptsProg = -1;
         /*this.anims.create({
             key: 'left',
             frames: this.anims.generateFrameNumbers('player', { start: 0, end: 3 }),
@@ -94,11 +96,11 @@ class Player extends Phaser.Physics.Arcade.Sprite{
                 this.setVelocityX(0);
                 //this.anims.play('turn');
         }
-        if(this._directionY < 0)
-        {
-            if(this.body.blocked.down)
-            {
-                this.setVelocityY(-1600);
+        if(this.jumpUnlocked) {
+            if (this._directionY < 0) {
+                if (this.body.blocked.down) {
+                    this.setVelocityY(-1600);
+                }
             }
         }
     }
@@ -109,20 +111,22 @@ class Player extends Phaser.Physics.Arcade.Sprite{
         this.rangeUse = scene.input.keyboard.addKey('E');
 
         //attack cac
-        if (this.attackUse.isDown){
-          if(this.cacAvailable){
-            //console.log("attack"); //On fait un truc
-            this.attackCac();
-            this.cacAvailable = false;
+          if(this.meleeUnlocked) {
+              if (this.attackUse.isDown) {
+                  if (this.cacAvailable) {
+                      //console.log("attack"); //On fait un truc
+                      this.attackCac();
+                      this.cacAvailable = false;
+                  }
+              }
+              if (this.cacAvailable == false) {
+                  this.delayCac -= delta;
+                  if (this.delayCac < 0) {
+                      this.cacAvailable = true;
+                      this.delayCac = this.cacBasic;
+                  }
+              }
           }
-        }
-        if (this.cacAvailable == false){
-          this.delayCac -= delta;
-          if (this.delayCac < 0){
-            this.cacAvailable = true;
-            this.delayCac = this.cacBasic;
-          }
-        }
         //dash
         if(this.dashUnlocked) {
             if (this.dashUse.isDown) {
@@ -162,6 +166,30 @@ class Player extends Phaser.Physics.Arcade.Sprite{
       }
 
       dash(){ // la vitesse est la pour le dash //target est la cible du dash
+        if(this._directionX > 0){
+            this.sens = 1;
+        }
+
+        if(this._directionX<0){
+            this.sens = -1;
+        }
+          Tableau.current.tweens.timeline({
+              targets: Tableau.current.player.body.velocity,
+              ease: 'Power2',
+              duration: 100,
+              loop: 0,
+              tweens: [
+                  {
+                      targets: Tableau.current.player.body.velocity,
+                      x: this.sens * 3000
+                  },
+                  {
+                      targets: Tableau.current.player.body.velocity,
+                      x: 0
+                  }
+              ]
+          });
+/*
         var posX = this.x / 64;
         posX = Math.trunc(posX);
 
@@ -181,7 +209,7 @@ class Player extends Phaser.Physics.Arcade.Sprite{
           }
           else if (target < posX){
             this.setVelocityX(-8000);
-        }
+        }*/
       }
 
       attackCac() {

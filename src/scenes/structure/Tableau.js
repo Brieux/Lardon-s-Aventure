@@ -91,9 +91,6 @@ class Tableau extends Phaser.Scene{
                 }
             }
         }
-        if(totalActive===0){
-            this.win();
-        }
     }
 
 
@@ -120,7 +117,6 @@ class Tableau extends Phaser.Scene{
           )
 
             {
-                ui.gagne();
                 monster.isDead=true; //ok le monstre est mort
                 monster.disableBody(true,true);//plus de collision
                 //notre joueur rebondit sur le monstre

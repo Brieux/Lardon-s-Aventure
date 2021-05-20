@@ -116,6 +116,25 @@ class Niveau1 extends Tableau{
         this.physics.add.collider(this.star1, plate);
         this.physics.add.collider(cafard, plate);
         this.physics.add.collider(criquet, plate);*/
+        this.stars = this.physics.add.sprite(600,600,"star").setCollideWorldBounds(true).setBounce(0.4);
+        this.stars.body.setAllowGravity(false);
+        this.stars.setDisplaySize(100,100)
+        this.stars.setDepth(10);
+        this.tweens.add({
+            targets: this.stars,
+            y: {
+                from: 600,
+                to:550, //on monte de 20 px
+                duration: 2000,// une demi seconde pour monter (et donc la même chose pour descendre)
+                ease: 'Sine.easeInOut', //courbe d'accélération/décélération
+                yoyo: -1, // de haut en bas, puis de bas en haut
+                repeat:-1 //se répète à l'infini
+            }
+        });
+
+        this.physics.add.collider(plate, this.stars);
+        this.physics.add.overlap(this.player, this.stars, this.ramasserEtoile, null, this);
+        ui.gagne();
     }
 
     update(time, delta){
