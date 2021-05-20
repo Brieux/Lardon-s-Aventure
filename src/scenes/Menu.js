@@ -52,10 +52,12 @@ class Menu extends Tableau{
             this.perso.body.setVelocity(400,0)
         }
         if (this.perso.x > 1850){
-            Tableau.suivant();
+            this.suivant();
         }
-
     }
+
+
+
     getMatr(){
         return super.getMatrix();
     }

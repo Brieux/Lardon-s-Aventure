@@ -20,7 +20,7 @@ let config = {
     scene: [
         new Ui(),
         new Menu("Intro"),
-        new Niveau1("Cliquez pour aller sur le niveau tile"),
+        new Niveau1("Niveau 1"),
     ],
     width: width,
     height: height,

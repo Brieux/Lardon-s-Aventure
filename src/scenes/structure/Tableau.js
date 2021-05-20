@@ -151,7 +151,7 @@ class Tableau extends Phaser.Scene{
      * Quand on a gagné
      */
     win(){
-        Tableau.suivant();
+        this.suivant();
     }
 
     /**
