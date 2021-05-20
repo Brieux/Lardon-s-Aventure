@@ -52,7 +52,7 @@ class Menu extends Tableau{
             this.perso.body.setVelocity(400,0)
         }
         if (this.perso.x > 1850){
-            this.win();
+            Tableau.suivant();
         }
 
     }
