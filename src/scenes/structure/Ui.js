@@ -107,6 +107,7 @@ class Ui extends Phaser.Scene{
 
 
         let ici = this;
+        this.containers = new Array();
         this.boutons = new Array();
         this.containersBool = new Array();
 
