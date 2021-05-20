@@ -11,6 +11,9 @@ class Ui extends Phaser.Scene{
         let trou;
         let faux;
         let container;
+        let containers;
+        let containersBool;
+        let boutons;
 
     }
     preload(){
@@ -103,94 +106,72 @@ class Ui extends Phaser.Scene{
         btFs.y=this.sys.canvas.height;
 
 
+        let ici = this;
+        this.boutons = new Array();
+        this.containersBool = new Array();
 
         this.container = this.physics.add.sprite(400,400,'container');
-        this.container.setDisplaySize(125,125);
-        this.container.body.setAllowGravity(false);
-        this.container.setVisible(false);
-
         this.container2 = this.physics.add.sprite(800,400,'container');
-        this.container2.setDisplaySize(125,125);
-        this.container2.body.setAllowGravity(false);
-        this.container2.setVisible(false);
+        this.boolContainer = false;
+        this.boolContainer2 = false;
+        this.containers.push(this.container);
+        this.containers.push(this.container2);
+        this.containersBool.push(this.boolContainer);
+        this.containersBool.push(this.boolContainer2);
+
+
+        this.containers.forEach(function(enfant){
+                enfant.setDisplaySize(125, 125);
+                enfant.body.setAllowGravity(false);
+                enfant.setVisible(false);
+        })
+
 
         this.dash = this.physics.add.sprite(200,200,'dash');
-        this.dash.setDisplaySize(100,100);
-        this.dash.body.setAllowGravity(false);
-        this.dash.setVisible(false);
-        this.dash.setInteractive();
-
         this.melee = this.physics.add.sprite(400,200,'melee');
-        this.melee.setDisplaySize(100,100);
-        this.melee.body.setAllowGravity(false);
-        this.melee.setVisible(false);
-        this.melee.setInteractive();
-
         this.jump = this.physics.add.sprite(600,200,'jump');
-        this.jump.setDisplaySize(100,100);
-        this.jump.body.setAllowGravity(false);
-        this.jump.setVisible(false);
-        this.jump.setInteractive();
-
         this.trou = this.physics.add.sprite(800,200,'true');
-        this.trou.setDisplaySize(100,100);
-        this.trou.body.setAllowGravity(false);
-        this.trou.setVisible(false);
-        this.trou.setInteractive();
-
         this.faux = this.physics.add.sprite(1000,200,'false');
-        this.faux.setDisplaySize(100,100);
-        this.faux.body.setAllowGravity(false);
-        this.faux.setVisible(false);
-        this.faux.setInteractive();
+        this.boutons.push(this.dash);
+        this.boutons.push(this.melee);
+        this.boutons.push(this.jump);
+        this.boutons.push(this.trou);
+        this.boutons.push(this.faux);
+
+        this.boutons.forEach(function(enfant, index){
+            enfant.setDisplaySize(100,100);
+            enfant.body.setAllowGravity(false);
+            enfant.setVisible(false);
+            enfant.setInteractive();
+            ici.input.enable(enfant);
+            ici.input.setDraggable(enfant);
+            ici.boutons.forEach(function(child) {
+                if (enfant === child) {
+                    console.log("same");
+                } else {
+                    ici.physics.add.collider(enfant, child, function(){
+                        console.log("collision bouton");
+                    });
+
+                }
+            })
+        })
 
 
-        let ici = this;
 
-        this.physics.add.overlap(this.melee, this.container, function(){
-            ici.melee.setPosition(ici.container.x, ici.container.y);
-        });
-        this.physics.add.overlap(this.dash, this.container, function(){
-            ici.dash.setPosition(ici.container.x, ici.container.y);
-        });
-        this.physics.add.overlap(this.jump, this.container, function(){
-            ici.jump.setPosition(ici.container.x, ici.container.y);
-        });
-        this.physics.add.overlap(this.trou, this.container, function(){
-            ici.trou.setPosition(ici.container.x, ici.container.y);
-        });
-        this.physics.add.overlap(this.faux, this.container, function(){
-            ici.faux.setPosition(ici.container.x, ici.container.y);
+        this.containers.forEach(function(enfant,index){
+            let here = ici;
+            ici.boutons.forEach(function(child){
+                here.physics.add.overlap(child, enfant, function(){
+                    child.setPosition(enfant.x, enfant.y);
+                    here.containersBool[index] = true;
+                });
+            });
         });
 
-        this.physics.add.overlap(this.melee, this.container2, function(){
-            ici.melee.setPosition(ici.container2.x, ici.container2.y);
-        });
-        this.physics.add.overlap(this.dash, this.container2, function(){
-            ici.dash.setPosition(ici.container2.x, ici.container2.y);
-        });
-        this.physics.add.overlap(this.jump, this.container2, function(){
-            ici.jump.setPosition(ici.container2.x, ici.container2.y);
-        });
-        this.physics.add.overlap(this.trou, this.container2, function(){
-            ici.trou.setPosition(ici.container2.x, ici.container2.y);
-        });
-        this.physics.add.overlap(this.faux, this.container2, function(){
-            ici.faux.setPosition(ici.container2.x, ici.container2.y);
-        });
-
-
-        this.input.enable(this.dash);
-        this.input.setDraggable(this.dash);
-        this.input.enable(this.trou);
-        this.input.setDraggable(this.trou);
-        this.input.enable(this.faux);
-        this.input.setDraggable(this.faux);
-        this.input.enable(this.melee);
-        this.input.setDraggable(this.melee);
-        this.input.enable(this.jump);
-        this.input.setDraggable(this.jump);
-
+        console.log(this.containers);
+        console.log(this.containersBool);
+        console.log(this.boutons);
 
         this.input.on('drag', function (pointer, gameObject, dragX, dragY) {
             gameObject.x = dragX;
@@ -218,32 +199,33 @@ class Ui extends Phaser.Scene{
     }
 
     showHUD(){
-        this.dash.setVisible(true);
-        this.melee.setVisible(true);
-        this.jump.setVisible(true);
-        this.trou.setVisible(true);
-        this.faux.setVisible(true);
-        this.container.setVisible(true);
-        this.container2.setVisible(true);
+        this.containers.forEach(function(child){
+            child.setVisible(true);
+        })
+        this.boutons.forEach(function(kid){
+            kid.setVisible(true);
+        })
     }
 
     hideHud(){
         if(this.dash.x == this.container.x){
             Tableau.current.player.dashUnlocked = true;
         }
-
-        this.dash.setVisible(false);
-        this.jump.setVisible(false);
-        this.trou.setVisible(false);
-        this.faux.setVisible(false);
-        this.melee.setVisible(false);
-        this.container.setVisible(false);
-        this.container2.setVisible(false);
+        /*this.boutons[0].texture.key*/
+        this.containers.forEach(function(child){
+            child.setVisible(false);
+        })
+        this.boutons.forEach(function(kid){
+            kid.setVisible(false);
+        })
 
         this.dash.setPosition(200,200);
         this.melee.setPosition(400,200);
         this.jump.setPosition(600,200);
         this.trou.setPosition(800,200);
         this.faux.setPosition(1000,200);
+
+        this.containersBool[0] = false;
+        this.containersBool[1] = false;
     }
 }
