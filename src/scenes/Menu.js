@@ -2,13 +2,13 @@ class Menu extends Tableau{
 
     constructor() {
         super('Bureau');
-        let perso;
+        let persou;
     }
 
     preload() {
         super.preload();
         this.load.image('sol', 'assets/BURO.png');
-        this.load.image('persoNormal', 'assets/PlayerBureau.png');
+        this.load.image('persoNormalBureau', 'assets/PlayerBureau.png');
         this.load.video('intro', 'assets/intro.mp4','loadeddata', false, true);
 
     }
@@ -27,35 +27,61 @@ class Menu extends Tableau{
         this.cameras.main.setBounds(0, 0, largeurDuTableau, hauteurDuTableau);
         this.physics.world.setBounds(0, 0, largeurDuTableau,  hauteurDuTableau);
 
-        this.sky=this.add.tileSprite(
+        this.fond=this.add.tileSprite(
             0,
             0,
             0,0,
             'sol'
         );
-        this.sky.setSize(3290,1780);
-        this.sky.setDisplaySize(2335,1314);
-        this.sky.setOrigin(0,0);
-        this.sky.setScrollFactor(0);
+        this.fond.setSize(3290,1780);
+        this.fond.setDisplaySize(2335,1314);
+        this.fond.setOrigin(0,0);
+        this.fond.setScrollFactor(0);
 
-        this.perso = this.physics.add.sprite(300,525, 'persoNormal');
-        this.perso.body.setAllowGravity(false);
-        this.perso.setDisplaySize(150,410);
+        this.persou = this.physics.add.sprite(300,525, 'persoNormalBureau');
+        this.persou.body.setAllowGravity(false);
+        this.persou.setDisplaySize(150,410);
 
-
+        this.text = this.add.text(1100,650, 'Cliquez pour commencer');
+        this.text.setFontSize(40);
+        this.tweens.add({
+            targets: this.text,
+            alpha: {
+                from: 0.2,
+                to:1, //on monte de 20 px
+                duration: 1100,// une demi seconde pour monter (et donc la même chose pour descendre)
+                ease: 'Sine.easeInOut', //courbe d'accélération/décélération
+                yoyo: -1, // de haut en bas, puis de bas en haut
+                repeat:-1 //se répète à l'infini
+            }
+        });
+        let here = this;
+        this.input.on('pointerdown', function(){
+            here.persou.body.setVelocity(800,0)
+        });
     }
 
     update(){
         super.update();
         if (vid.getCurrentTime() == vid.getDuration()) {
             vid.alpha -= 0.1;
-            this.perso.body.setVelocity(400,0)
+            //this.persou.body.setVelocity(400,0)
         }
-        if (this.perso.x > 1850){
-            this.suivant();
+        if(this.persou.x > 1000 && this.persou.x < 1100){
+            console.log("plop");
+            this.cameras.main.fadeOut(500, 0, 0, 0);
         }
-    }
 
+        if (this.persou.x > 1850){
+
+            console.log("loading new scne");
+            this.load.reset();
+            this.suivant();
+
+
+        }
+
+    }
 
 
     getMatr(){

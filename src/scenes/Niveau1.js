@@ -1,7 +1,7 @@
 class Niveau1 extends Tableau{
 
     constructor() {
-        super('Cliquez pour aller sur le niveau tile');
+        super('Niveau 1');
     }
     preload() {
         super.preload();
@@ -9,25 +9,15 @@ class Niveau1 extends Tableau{
         this.load.image('monster-violet', 'assets/enmi1.png');
         this.load.image('monstre2', 'assets/enmi1.png');
         this.load.image('ground', 'assets/platform.png');;
-        this.load.image('sol', 'assets/BackGround1.png');
-        this.load.image('fond', 'assets/assets/Background2_0001_Calque 2.jpg');
+        this.load.image('terrain', 'assets/BackGround1.png');
         this.load.image('solMatrix', 'assets/BackGround1_matrix.png');
         this.load.image('fondMatrix', 'assets/backGround_Matrix.jpg');
-        this.load.video('intro', 'assets/intro.mp4','loadeddata', false, true);
         this.load.image('persoMatrix', 'assets/skinMatrix.png');
         this.load.image('persoNormal', 'assets/player.png');
-        this.load.image('tonneau', 'assets/tonneau.png');
     }
 
     create() {
         super.create();
-
-        vid = this.add.video(width/2, height/2, 'intro');
-        vid.setDisplaySize(width,height);
-        vid.play(true);
-        vid.setDepth(40);
-        vid.setLoop(false);
-        vid.setCurrentTime(vid.getDuration());
 
         /////////////////////////////////////////////// La BASE DU NIVEAU /////////////////////////////////////
 
@@ -49,7 +39,7 @@ class Niveau1 extends Tableau{
             0,
             1654,
             964,
-            'fond'
+            'bg'
         );
         this.sky.setOrigin(0,0);
         this.sky.setScrollFactor(0);
@@ -60,7 +50,7 @@ class Niveau1 extends Tableau{
             0,
             4961,
             964,
-            'sol'
+            'terrain'
         );
         this.sky2.setScrollFactor(0);
         this.sky2.setOrigin(0,0);
@@ -156,7 +146,7 @@ class Niveau1 extends Tableau{
 
         }
         else {
-            this.sky2.setTexture('sol');
+            this.sky2.setTexture('terrain');
             this.sky.setTexture('fond');
             this.player.setTexture('persoNormal');
             //cafard.body.enable = true;
@@ -171,13 +161,6 @@ class Niveau1 extends Tableau{
             this.sky2.tilePositionX = this.cameras.main.scrollX;
             //le deuxième ciel se déplace moins vite pour accentuer l'effet
             this.sky.tilePositionX = this.cameras.main.scrollX * 0.3 + 500;
-
-            if (vid.getCurrentTime() == vid.getDuration()) {
-                vid.alpha -= 0.1;
-            }
-            if (vid.getCurrentTime() != vid.getDuration()) {
-                this.player.stop();
-            }
 
             //cafard.update();
             //criquet.update();

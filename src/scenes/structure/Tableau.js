@@ -52,7 +52,7 @@ class Tableau extends Phaser.Scene{
     }
     update(time, delta){
         super.update();
-        if(this.input.keyboard.addKey("ALT").isDown && this.chgtAvailable){
+        if(this.input.keyboard.addKey("ALT").isDown && this.chgtAvailable && Tableau.current.scene.key == 'Niveau 1'){
             this.chgt();
             this.chgtAvailable = false;
         }if(this.input.keyboard.addKey("ALT").isUp ){
@@ -140,7 +140,7 @@ class Tableau extends Phaser.Scene{
 
     /**
      * Pour reset cette scène proprement
-     * @private
+     *
      */
     _destroy(){
         this.player.stop();
@@ -182,6 +182,7 @@ class Tableau extends Phaser.Scene{
 
     static goTableau(tableau){
         if(Tableau.current){
+
             Tableau.current._destroy();
         }
         game.scene.start(tableau);

@@ -19,7 +19,7 @@ let config = {
     },
     scene: [
         new Ui(),
-        new Menu("Intro"),
+        new Menu("Bureau"),
         new Niveau1("Niveau 1"),
     ],
     width: width,
