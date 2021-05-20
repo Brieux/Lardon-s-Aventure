@@ -1,5 +1,8 @@
 class Niveau1 extends Tableau{
 
+    constructor() {
+        super('Cliquez pour aller sur le niveau tile');
+    }
     preload() {
         super.preload();
         this.load.image('star', 'assets/star.png');

@@ -4,16 +4,11 @@ class Ui extends Phaser.Scene {
     constructor() {
         super({key: 'ui', active: true});
         window.ui = this;
-        let dash;
-        let melee;
-        let jump;
-        let trou;
-        let faux;
-        let container;
-        let containers;
-        let containersBool;
-        let activeContainer;
-        let boutons;
+        let dash;let melee;
+        let jump;let trou;
+        let faux;let container;
+        let containers;let containersBool;
+        let activeContainer;let boutons;
 
     }
 
@@ -188,10 +183,12 @@ class Ui extends Phaser.Scene {
         if (Tableau.current) {
             this._tableauText.setText(Tableau.current.scene.key);
             this._tableauTextClass.setText(Tableau.current.constructor.name);
-            if (Tableau.current.getMatr() && Tableau.current.getAvail()) {
-                this.showHUD();
-            } else {
-                this.hideHud();
+            if (Tableau.current.scene.key != 'Intro') {
+                if (Tableau.current.getMatr() && Tableau.current.getAvail()) {
+                    this.showHUD();
+                } else {
+                    this.hideHud();
+                }
             }
         }
     }

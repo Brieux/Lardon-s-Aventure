@@ -157,7 +157,7 @@ class Tableau extends Phaser.Scene{
     /**
      * Va au tableau suivant
      */
-    static suivant(){
+    suivant(){
         let ceSeraLaSuivante=false;
         let nextScene=null;
         if(Tableau.current){
