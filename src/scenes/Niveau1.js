@@ -15,7 +15,7 @@ class Niveau1 extends Tableau{
         this.load.image('persoMatrix', 'assets/skinMatrix.png');
         this.load.image('persoNormal', 'assets/player.png');
         this.load.spritesheet('AnimPlayer',
-            'assets/run112000.png',
+            'assets/animRun.png',
             { frameWidth: 1559, frameHeight: 1194  }
         );
         this.load.spritesheet('AnimIdle',

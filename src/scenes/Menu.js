@@ -10,7 +10,9 @@ class Menu extends Tableau{
         this.load.image('sol', 'assets/BURO.png');
         this.load.image('persoNormalBureau', 'assets/PlayerBureau.png');
         this.load.video('intro', 'assets/intro.mp4','loadeddata', false, true);
-
+        this.load.spritesheet('AnimBureau',
+            'assets/animBureau.png',
+            { frameWidth: 1559, frameHeight: 1194 })
     }
 
     create() {
@@ -38,9 +40,18 @@ class Menu extends Tableau{
         this.fond.setOrigin(0,0);
         this.fond.setScrollFactor(0);
 
+        this.anims.create(
+            {
+                key: 'idle',
+                frames: this.anims.generateFrameNumbers('AnimBureau', { start: 1, end:  1}),
+                frameRate: 10,
+                repeat: -1
+            });
+
         this.persou = this.physics.add.sprite(300,525, 'persoNormalBureau');
+        this.persou.anims.play('idle');
         this.persou.body.setAllowGravity(false);
-        this.persou.setDisplaySize(150,410);
+        this.persou.setDisplaySize(750,410);
 
         this.text = this.add.text(1100,650, 'Cliquez pour commencer');
         this.text.setFontSize(40);
@@ -55,10 +66,24 @@ class Menu extends Tableau{
                 repeat:-1 //se répète à l'infini
             }
         });
+
+        this.anims.create(
+            {
+                key: 'run',
+                frames: this.anims.generateFrameNumbers('AnimBureau', { start: 2, end:  7}),
+                frameRate: 10,
+                repeat: -1
+            });
+
         let here = this;
         this.input.on('pointerdown', function(){
-            here.persou.body.setVelocity(800,0)
+            here.persou.body.setVelocity(800,0);
+            console.log;
+            console.log(here.anims);
+            here.persou.anims.play('run');
         });
+
+
     }
 
     update(){
