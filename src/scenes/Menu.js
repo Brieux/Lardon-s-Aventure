@@ -13,6 +13,9 @@ class Menu extends Tableau{
         this.load.spritesheet('AnimBureau',
             'assets/animBureau.png',
             { frameWidth: 1559, frameHeight: 1194 })
+        this.load.spritesheet('AnimIdleBureau',
+            'assets/animIdleBureau.png',
+            { frameWidth: 1559, frameHeight: 1194 })
     }
 
     create() {
@@ -43,13 +46,14 @@ class Menu extends Tableau{
         this.anims.create(
             {
                 key: 'idle',
-                frames: this.anims.generateFrameNumbers('AnimBureau', { start: 1, end:  1}),
-                frameRate: 10,
-                repeat: -1
+                frames: this.anims.generateFrameNumbers('AnimIdleBureau', { start: 0, end:  4}),
+                frameRate: 5,
+                repeat: -1,
+                yoyo: -1
             });
 
         this.persou = this.physics.add.sprite(300,525, 'persoNormalBureau');
-        this.persou.anims.play('idle');
+        this.persou.anims.play('idle', true);
         this.persou.body.setAllowGravity(false);
         this.persou.setDisplaySize(750,410);
 

@@ -19,7 +19,7 @@ class Niveau1 extends Tableau{
             { frameWidth: 1559, frameHeight: 1194  }
         );
         this.load.spritesheet('AnimIdle',
-            'assets/idleSpritesheet.png',
+            'assets/animIdle.png',
             { frameWidth: 1559, frameHeight: 1194  }
         );
     }
