@@ -58,6 +58,7 @@ class Tableau extends Phaser.Scene{
         }if(this.input.keyboard.addKey("ALT").isUp ){
             this.chgtAvailable = true;
         }
+        this.player.update();
     }
 
     chgt(){

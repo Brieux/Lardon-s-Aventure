@@ -1,15 +1,16 @@
 class Player extends Phaser.Physics.Arcade.Sprite{
 
     constructor(scene, x, y) {
-        super(scene, x, y, "player")
+        super(scene, x, y, "AnimPlayer")
         scene.add.existing(this)
         scene.physics.add.existing(this)
         this.setCollideWorldBounds(true);
         this.setGravityY(2500);
         this.body.setAllowGravity(true);
         this.setFriction(1,1);
-        this.setDisplaySize(116,319);
-        this.setOffset(0,0);
+        this.setDisplaySize(525,325);
+        this.setSize(450,1200);
+        this.setOffset(525,0);
         this.setVelocityY(0);
         this.onAir = false;
         this.saveY =this.scene.height;
@@ -32,7 +33,45 @@ class Player extends Phaser.Physics.Arcade.Sprite{
         this.cacBasic = 2000;
         this.delayCac = this.cacBasic;
 
+        this.anims.create(
+            {
+                key: 'left',
+                frames: this.anims.generateFrameNumbers('AnimPlayer', { start: 2, end:  7}),
+                frameRate: 10,
+                repeat: -1
+            });
 
+        this.anims.create(
+            {
+                key: 'right',
+                frames: this.anims.generateFrameNumbers('AnimPlayer', { start: 2, end: 7 }),
+                frameRate: 10,
+                repeat: -1
+
+            });
+
+        this.anims.create(
+            {
+                key: 'turn',
+                frames: this.anims.generateFrameNumbers('AnimIdle', { start: 0, end: 4 }),
+                frameRate: 5,
+                yoyo :-1,
+                repeat: -1
+            });
+
+        this.anims.create(
+            {
+                key: 'jumpLeft',
+                frames: [ { key: 'AnimPlayer', frame: 1 } ],
+                frameRate: 20
+            });
+
+        this.anims.create(
+            {
+                key: 'jumpRight',
+                frames: [ { key: 'AnimPlayer', frame: 1 } ],
+                frameRate: 20
+            });
 
     }
 
@@ -65,15 +104,17 @@ class Player extends Phaser.Physics.Arcade.Sprite{
         switch (true){
             case this._directionX<0:
                 this.setVelocityX(-550);
-                //this.anims.play('left', true);
+                this.flipX = true;
+                this.anims.play('left', true);
                 break;
             case this._directionX>0:
                 this.setVelocityX(550);
-                //this.anims.play('right', true);
+                this.flipX = false;
+                this.anims.play('right', true);
                 break;
             default:
                 this.setVelocityX(0);
-                //this.anims.play('turn');
+                this.anims.play('turn', true);
         }
         if(this.jumpUnlocked) {
             if (this._directionY < 0) {

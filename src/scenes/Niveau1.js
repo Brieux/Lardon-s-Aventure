@@ -14,6 +14,14 @@ class Niveau1 extends Tableau{
         this.load.image('fondMatrix', 'assets/backGround_Matrix.jpg');
         this.load.image('persoMatrix', 'assets/skinMatrix.png');
         this.load.image('persoNormal', 'assets/player.png');
+        this.load.spritesheet('AnimPlayer',
+            'assets/run112000.png',
+            { frameWidth: 1559, frameHeight: 1194  }
+        );
+        this.load.spritesheet('AnimIdle',
+            'assets/idleSpritesheet.png',
+            { frameWidth: 1559, frameHeight: 1194  }
+        );
     }
 
     create() {
@@ -148,7 +156,7 @@ class Niveau1 extends Tableau{
         else {
             this.sky2.setTexture('terrain');
             this.sky.setTexture('fond');
-            this.player.setTexture('persoNormal');
+
             //cafard.body.enable = true;
             //criquet.body.enable = true;
             this.player.body.enable = true;
