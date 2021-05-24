@@ -138,15 +138,8 @@ class Ui extends Phaser.Scene {
             enfant.setVisible(false);
             enfant.setInteractive();
             ici.input.enable(enfant);
-            ici.input.setDraggable(enfant);
-            ici.boutons.forEach(function (child) {
-                if (enfant === child) {
-                } else {
-                    ici.physics.add.collider(enfant, child, function () {
-                    });
+            ici.input.setHitArea(enfant);
 
-                }
-            })
         })
 
 
