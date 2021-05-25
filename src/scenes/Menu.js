@@ -25,7 +25,7 @@ class Menu extends Tableau{
         vid.play(true);
         vid.setDepth(40);
         vid.setLoop(false);
-        vid.setCurrentTime(vid.getDuration());
+        //vid.setCurrentTime(vid.getDuration());
 
         let largeurDuTableau=2335;
         let hauteurDuTableau=1314; //la hauteur est identique au cadre du jeu
@@ -79,14 +79,6 @@ class Menu extends Tableau{
                 repeat: -1
             });
 
-        let here = this;
-        this.input.on('pointerdown', function(){
-            here.persou.body.setVelocity(800,0);
-            console.log;
-            console.log(here.anims);
-            here.persou.anims.play('run');
-        });
-
 
     }
 
@@ -94,6 +86,13 @@ class Menu extends Tableau{
         super.update();
         if (vid.getCurrentTime() == vid.getDuration()) {
             vid.alpha -= 0.1;
+            let here = this;
+            this.input.on('pointerdown', function(){
+                here.persou.body.setVelocity(800,0);
+                console.log;
+                console.log(here.anims);
+                here.persou.anims.play('run');
+            });
             //this.persou.body.setVelocity(400,0)
         }
         if(this.persou.x > 1000 && this.persou.x < 1100){
