@@ -36,6 +36,9 @@ class Niveau1 extends Tableau{
             'assets/animEnmi2.png',
             { frameWidth: 966, frameHeight: 709  }
         );
+        this.load.audio('MusicNormal', 'assets/sound/Normal.mp3');
+        this.load.audio('MusicMatrix', 'assets/sound/Matrice.mp3');
+
     }
 
     create() {
@@ -154,6 +157,30 @@ class Niveau1 extends Tableau{
         this.physics.add.overlap(this.player, this.stars, this.ramasserEtoile, null, this);
         ui.gagne();
         super.normalMode = true;
+
+        this.Ambiance = this.sound.add('MusicNormal');
+        this.AmbianceMatrix = this.sound.add('MusicMatrix');
+
+        var configMusic =
+            {
+                mute: false,
+                volume: 0,
+                rate : 1,
+                detune: 0,
+                seek: 0,
+                loop: true,
+                delay:0,
+            };
+        this.AmbianceMatrix.play(configMusic);
+        this.AmbianceMatrix.volume =0;
+
+
+        this.Ambiance.play(configMusic);
+        this.tweens.add({
+            targets:this.Ambiance,
+            volume:1,
+            duration:1500,
+        })
     }
 
     update(time, delta){
@@ -174,6 +201,16 @@ class Niveau1 extends Tableau{
             cafard.body.enable = false;
             criquet.body.enable = false;
             criquet.pausetween();
+            this.tweens.add({
+                targets:this.AmbianceMatrix,
+                volume:1,
+                duration:1500,
+            })
+            this.tweens.add({
+                targets:this.Ambiance,
+                volume:0,
+                duration:1500,
+            })
 
         }
         if(!super.getMatrix() && super.getNormalMode()) {
@@ -185,6 +222,16 @@ class Niveau1 extends Tableau{
             this.player.body.enable = true;
             criquet.playtween();
             super.normalMode = false;
+            this.tweens.add({
+                targets:this.AmbianceMatrix,
+                volume:0,
+                duration:1500,
+            })
+            this.tweens.add({
+                targets:this.Ambiance,
+                volume:1,
+                duration:1500,
+            })
         }
         if(!super.getMatrix()) {
             this.player.move(this, time, delta);

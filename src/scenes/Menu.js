@@ -16,6 +16,7 @@ class Menu extends Tableau{
         this.load.spritesheet('AnimIdleBureau',
             'assets/animIdleBureau.png',
             { frameWidth: 1559, frameHeight: 1194 })
+        this.load.audio('TitleMusic', 'assets/sound/Titre .mp3');
     }
 
     create() {
@@ -26,6 +27,19 @@ class Menu extends Tableau{
         vid.setDepth(40);
         vid.setLoop(false);
         //vid.setCurrentTime(vid.getDuration());
+
+        this.musicAmb = this.sound.add('TitleMusic');
+
+        var musicConfig =
+            {
+                mute: false,
+                volume: 0.5,
+                rate : 1,
+                detune: 0,
+                seek: 0,
+                loop: true,
+                delay:0,
+            }
 
         let largeurDuTableau=2335;
         let hauteurDuTableau=1314; //la hauteur est identique au cadre du jeu
@@ -79,6 +93,8 @@ class Menu extends Tableau{
                 repeat: -1
             });
 
+        this.musicAmb.play(musicConfig);
+
 
     }
 
@@ -86,11 +102,17 @@ class Menu extends Tableau{
         super.update();
         if (vid.getCurrentTime() == vid.getDuration()) {
             vid.alpha -= 0.1;
+
             let here = this;
             this.input.on('pointerdown', function(){
                 here.persou.body.setVelocity(800,0);
                 console.log;
                 console.log(here.anims);
+                here.tweens.add({
+                    targets:here.musicAmb,
+                    volume:0,
+                    duration:1500,
+                })
                 here.persou.anims.play('run');
             });
             //this.persou.body.setVelocity(400,0)
