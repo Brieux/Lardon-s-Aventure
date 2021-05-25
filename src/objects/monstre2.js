@@ -36,10 +36,10 @@ class monstre2 extends ObjetEnnemi{
 
     update(){
       if (this.body.velocity.x > 0){
-        this.setFlip(true, false);
+        this.flipX = true;
       }
       else {
-        this.setFlip(false, false);
+        this.flipX = false;
       }
     }
 

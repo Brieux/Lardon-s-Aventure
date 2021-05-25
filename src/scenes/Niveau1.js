@@ -1,4 +1,8 @@
 class Niveau1 extends Tableau{
+//MUSIQUE:http://onlinesequencer.net/2073382
+    //MATRIX:http://onlinesequencer.net/2073386
+    //MATRIX CASSEE :http://onlinesequencer.net/2073461
+    //TITRE http://onlinesequencer.net/2073438
 
     constructor() {
         super('Niveau 1');
