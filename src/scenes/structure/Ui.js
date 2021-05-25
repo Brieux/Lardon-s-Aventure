@@ -138,7 +138,7 @@ class Ui extends Phaser.Scene {
             enfant.setVisible(false);
             enfant.setInteractive();
             ici.input.enable(enfant);
-            ici.input.setHitArea(enfant);
+            ici.input.setDraggable(enfant);
 
         })
 

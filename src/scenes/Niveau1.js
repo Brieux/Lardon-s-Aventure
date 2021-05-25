@@ -22,6 +22,14 @@ class Niveau1 extends Tableau{
             'assets/animIdle.png',
             { frameWidth: 1559, frameHeight: 1194  }
         );
+        this.load.spritesheet('Enmi1Walk',
+            'assets/animEnmi1.png',
+            { frameWidth: 1512, frameHeight: 702  }
+        );
+        this.load.spritesheet('Enmi2Walk',
+            'assets/animEnmi2.png',
+            { frameWidth: 966, frameHeight: 709  }
+        );
     }
 
     create() {
@@ -73,11 +81,12 @@ class Niveau1 extends Tableau{
         this.physics.add.collider(this.player,this.platforms);
 
         //Monstres
-        /*cafard = new monstre2(this,400,800);
+        cafard = new monstre2(this,400,600);
         ennemis[0] = cafard;
 
         criquet = new monstreviolet(this,450,200);
-        ennemis[1] = criquet;*/
+        ennemis[1] = criquet;
+
         let plate = this.physics.add.staticGroup();
         plate.create(0,775);
         plate.children.entries[0].setDisplaySize(1210,10);
@@ -133,6 +142,8 @@ class Niveau1 extends Tableau{
             }
         });
 
+
+        this.physics.add.collider(plate, cafard);
         this.physics.add.collider(plate, this.stars);
         this.physics.add.overlap(this.player, this.stars, this.ramasserEtoile, null, this);
         ui.gagne();
@@ -151,14 +162,16 @@ class Niveau1 extends Tableau{
             this.sky.setTexture('fondMatrix');
             this.player.setTexture('persoMatrix');
             this.player.body.enable = false;
+            cafard.body.enable = false;
+            criquet.body.enable = false;
 
         }
         else {
             this.sky2.setTexture('terrain');
             this.sky.setTexture('fond');
 
-            //cafard.body.enable = true;
-            //criquet.body.enable = true;
+            cafard.body.enable = true;
+            criquet.body.enable = true;
             this.player.body.enable = true;
 
         }
@@ -170,8 +183,8 @@ class Niveau1 extends Tableau{
             //le deuxième ciel se déplace moins vite pour accentuer l'effet
             this.sky.tilePositionX = this.cameras.main.scrollX * 0.3 + 500;
 
-            //cafard.update();
-            //criquet.update();
+            cafard.update();
+            criquet.update();
 
             //console.log(cafard);
         }

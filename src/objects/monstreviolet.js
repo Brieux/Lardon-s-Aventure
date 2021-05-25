@@ -6,13 +6,35 @@ class monstreviolet extends ObjetEnnemi{
      * @param y
      */
     constructor(scene, x, y) {
-        super(scene, x, y, "monster-violet");
-        this.body.allowGravity=true;
+        super(scene, x, y);
+        this.body.allowGravity=false;
 
-        this.setDisplaySize(64,64);
+        this.setDisplaySize(6,6);
         this.setVelocityX(75);
         this.setCollideWorldBounds(true);
         this.setBounce(1);
+        this.setSize(700,700)
+        this.setOffset(125,45)
+        this.anims.create(
+            {
+                key: 'fly',
+                frames: this.anims.generateFrameNumbers('Enmi2Walk', { start: 0, end: 3}),
+                frameRate: 9,
+                repeat:-1
+            });
+        this.anims.play('fly');
+
+        this.scene.tweens.add({
+            targets: this,
+            y: {
+                from: 200,
+                to:250, //on monte de 20 px
+                duration: 1000,// une demi seconde pour monter (et donc la même chose pour descendre)
+                ease: 'Sine.easeInOut', //courbe d'accélération/décélération
+                yoyo: -1, // de haut en bas, puis de bas en haut
+                repeat:-1 //se répète à l'infini
+            }
+        });
     }
 
     update(){
@@ -22,6 +44,7 @@ class monstreviolet extends ObjetEnnemi{
       else {
         this.setFlip(false, false);
       }
+
     }
 
     getKilled(){
