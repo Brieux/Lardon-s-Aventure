@@ -13,6 +13,8 @@ class Niveau1 extends Tableau{
         this.load.image('solMatrix', 'assets/BackGround1_matrix.png');
         this.load.image('fondMatrix', 'assets/backGround_Matrix.jpg');
         this.load.image('persoMatrix', 'assets/skinMatrix.png');
+        this.load.image('cafardMatrix', 'assets/enmi1Matrix.png');
+        this.load.image('criquetMatrix', 'assets/enmi2Matrix.png');
         this.load.image('persoNormal', 'assets/player.png');
         this.load.spritesheet('AnimPlayer',
             'assets/animRun.png',
@@ -81,17 +83,17 @@ class Niveau1 extends Tableau{
         this.physics.add.collider(this.player,this.platforms);
 
         //Monstres
-        cafard = new monstre2(this,400,600);
+        cafard = new monstre2(this,2000,600);
         ennemis[0] = cafard;
 
-        criquet = new monstreviolet(this,450,200);
+        criquet = new monstreviolet(this,1500,200);
         ennemis[1] = criquet;
 
         let plate = this.physics.add.staticGroup();
         plate.create(0,775);
-        plate.children.entries[0].setDisplaySize(1210,10);
+        plate.children.entries[0].setDisplaySize(1210,50);
         plate.create(1600,775);
-        plate.children.entries[1].setDisplaySize(2100,10);
+        plate.children.entries[1].setDisplaySize(2100,50);
 
 
         plate.children.iterate(function (child) {
@@ -161,9 +163,12 @@ class Niveau1 extends Tableau{
             this.sky2.setTexture('solMatrix');
             this.sky.setTexture('fondMatrix');
             this.player.setTexture('persoMatrix');
+            cafard.setTexture('cafardMatrix');
+            criquet.setTexture('criquetMatrix');
             this.player.body.enable = false;
             cafard.body.enable = false;
             criquet.body.enable = false;
+            criquet.pausetween();
 
         }
         else {
@@ -173,6 +178,7 @@ class Niveau1 extends Tableau{
             cafard.body.enable = true;
             criquet.body.enable = true;
             this.player.body.enable = true;
+            criquet.playtween();
 
         }
         if(!super.getMatrix()) {

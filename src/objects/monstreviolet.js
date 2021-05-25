@@ -5,6 +5,10 @@ class monstreviolet extends ObjetEnnemi{
      * @param x
      * @param y
      */
+    preload(){
+
+    }
+
     constructor(scene, x, y) {
         super(scene, x, y);
         this.body.allowGravity=false;
@@ -24,7 +28,7 @@ class monstreviolet extends ObjetEnnemi{
             });
         this.anims.play('fly');
 
-        this.scene.tweens.add({
+        this.tween1 = this.scene.tweens.add({
             targets: this,
             y: {
                 from: 200,
@@ -45,8 +49,15 @@ class monstreviolet extends ObjetEnnemi{
         this.setFlip(false, false);
       }
 
+
     }
 
+    pausetween(){
+        this.tween1.pause();
+    }
+    playtween(){
+        this.tween1.resume();
+    }
     getKilled(){
 
     }
