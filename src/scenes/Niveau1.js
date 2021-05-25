@@ -149,6 +149,7 @@ class Niveau1 extends Tableau{
         this.physics.add.collider(plate, this.stars);
         this.physics.add.overlap(this.player, this.stars, this.ramasserEtoile, null, this);
         ui.gagne();
+        super.normalMode = true;
     }
 
     update(time, delta){
@@ -171,15 +172,15 @@ class Niveau1 extends Tableau{
             criquet.pausetween();
 
         }
-        else {
+        if(!super.getMatrix() && super.getNormalMode()) {
             this.sky2.setTexture('terrain');
             this.sky.setTexture('fond');
-
+            cafard.y = cafard.y -20;
             cafard.body.enable = true;
             criquet.body.enable = true;
             this.player.body.enable = true;
             criquet.playtween();
-
+            super.normalMode = false;
         }
         if(!super.getMatrix()) {
             this.player.move(this, time, delta);

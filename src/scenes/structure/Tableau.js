@@ -11,6 +11,7 @@ class Tableau extends Phaser.Scene{
         super(key);
         this.matrix = false;
         this.chgtAvailable = true;
+        this.normalMode = true ;
 
     }
 
@@ -21,6 +22,10 @@ class Tableau extends Phaser.Scene{
     getAvailable(){
         return this.chgtAvailable;
     }
+    getNormalMode(){
+        return this.normalMode;
+    }
+
     /**
      * Par défaut on charge un fond et le player
      */
@@ -55,19 +60,24 @@ class Tableau extends Phaser.Scene{
         if(this.input.keyboard.addKey("ALT").isDown && this.chgtAvailable && Tableau.current.scene.key == 'Niveau 1'){
             this.chgt();
             this.chgtAvailable = false;
+
+
         }if(this.input.keyboard.addKey("ALT").isUp ){
             this.chgtAvailable = true;
         }
+
+
         this.player.update();
     }
 
     chgt(){
         if (this.matrix){
-            console.log("version Matrix");
+            console.log("version normal");
             this.matrix = false;
+            this.normalMode = true;
         }
         else {
-            console.log("version normal");
+            console.log("version matrix");
             this.matrix =  true;
         }
     }
