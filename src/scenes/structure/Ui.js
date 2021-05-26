@@ -19,7 +19,8 @@ class Ui extends Phaser.Scene {
         this.load.image('melee', 'assets/melee.png');
         this.load.image('true', 'assets/true.png');
         this.load.image('false', 'assets/false.png');
-        this.load.image('container', 'assets/block_containter.jpg');
+        this.load.image('container', 'assets/block_containter.png');
+        this.load.image('container2', 'assets/block_containterTF.png');
     }
 
     create() {
@@ -105,7 +106,7 @@ class Ui extends Phaser.Scene {
         this.activeContainer = new Array();
 
         this.container = this.physics.add.sprite(400, 400, 'container');
-        this.container2 = this.physics.add.sprite(800, 400, 'container');
+        this.container2 = this.physics.add.sprite(800, 400, 'container2');
         this.boolContainer = false;
         this.boolContainer2 = false;
         this.containers.push(this.container);
