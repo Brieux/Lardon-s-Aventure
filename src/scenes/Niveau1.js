@@ -4,6 +4,8 @@ class Niveau1 extends Tableau{
     //MATRIX CASSEE :http://onlinesequencer.net/2073461
     //TITRE http://onlinesequencer.net/2073438
 
+
+
     constructor() {
         super('Niveau 1');
     }
@@ -56,7 +58,21 @@ class Niveau1 extends Tableau{
         this.cameras.main.startFollow(this.player, false, 0.05, 0.05);
 
         this.physics.add.collider(this.player,this.platforms);
+        this.Ambiance = this.sound.add('MusicNormal');
+        this.AmbianceMatrix = this.sound.add('MusicMatrix');
+        this.AmbianceMatrix.play();
+        this.Ambiance.play();
 
+        this.Ambiance.volume = 0;
+        this.AmbianceMatrix.volume = 0;
+        this.Ambiance.loop = true;
+        this.AmbianceMatrix.loop = true;
+
+        this.tweens.add({
+            targets:this.Ambiance,
+            volume:1,
+            duration:1500,
+        })
 
         //on change de ciel, on fait une tileSprite ce qui permet d'avoir une image qui se répète
         this.sky=this.add.tileSprite(
@@ -158,29 +174,6 @@ class Niveau1 extends Tableau{
         ui.gagne();
         super.normalMode = true;
 
-        this.Ambiance = this.sound.add('MusicNormal');
-        this.AmbianceMatrix = this.sound.add('MusicMatrix');
-
-        var configMusic =
-            {
-                mute: false,
-                volume: 0,
-                rate : 1,
-                detune: 0,
-                seek: 0,
-                loop: true,
-                delay:0,
-            };
-        this.AmbianceMatrix.play(configMusic);
-        this.AmbianceMatrix.volume =0;
-
-
-        this.Ambiance.play(configMusic);
-        this.tweens.add({
-            targets:this.Ambiance,
-            volume:1,
-            duration:1500,
-        })
     }
 
     update(time, delta){
@@ -201,17 +194,20 @@ class Niveau1 extends Tableau{
             cafard.body.enable = false;
             criquet.body.enable = false;
             criquet.pausetween();
+            this.AmbianceMatrix.volume = 1;
+            this.Ambiance.volume = 0;
+            /*if(this.Ambiance.volume ===1 ){
+                this.tweens.add({
+                    targets:this.AmbianceMatrix,
+                    volume:1,
+                    duration:1500,
+                })
             this.tweens.add({
-                targets:this.AmbianceMatrix,
-                volume:1,
-                duration:1500,
-            })
-            this.tweens.add({
-                targets:this.Ambiance,
-                volume:0,
-                duration:1500,
-            })
-
+                    targets:this.Ambiance,
+                    volume:0,
+                    duration:1500,
+                })
+            }*/
         }
         if(!super.getMatrix() && super.getNormalMode()) {
             this.sky2.setTexture('terrain');
@@ -222,16 +218,20 @@ class Niveau1 extends Tableau{
             this.player.body.enable = true;
             criquet.playtween();
             super.normalMode = false;
-            this.tweens.add({
-                targets:this.AmbianceMatrix,
-                volume:0,
-                duration:1500,
-            })
-            this.tweens.add({
-                targets:this.Ambiance,
-                volume:1,
-                duration:1500,
-            })
+            this.AmbianceMatrix.volume = 0;
+            this.Ambiance.volume = 1;
+            /*if(this.AmbianceMatrix.volume === 1 ){
+                this.tweens.add({
+                    targets:this.AmbianceMatrix,
+                    volume:0,
+                    duration:1500,
+                })
+                this.tweens.add({
+                    targets:this.Ambiance,
+                    volume:1,
+                    duration:1500,
+                })
+            }*/
         }
         if(!super.getMatrix()) {
             this.player.move(this, time, delta);
@@ -254,6 +254,20 @@ class Niveau1 extends Tableau{
 
     getAvail(){
         return super.getAvailable();
+    }
+
+
+    MusicNormal(){
+        this.tweens.add({
+            targets:this.AmbianceMatrix,
+            volume:0,
+            duration:1500,
+        })
+        this.tweens.add({
+            targets:this.Ambiance,
+            volume:1,
+            duration:1500,
+        })
     }
 }
 
