@@ -8,6 +8,11 @@ body{
 
 }
 
+@font-face {
+    font-family: Hermes;
+    src: url('assets/Hermes-Regular.otf');
+}
+
 #game{
     background-color: #111;
     --w:1654px;
