@@ -1,5 +1,5 @@
 class Niveau1 extends Tableau{
-//MUSIQUE:http://onlinesequencer.net/2073382
+    //MUSIQUE:http://onlinesequencer.net/2073382
     //MATRIX:http://onlinesequencer.net/2073386
     //MATRIX CASSEE :http://onlinesequencer.net/2073461
     //TITRE http://onlinesequencer.net/2073438
@@ -22,6 +22,7 @@ class Niveau1 extends Tableau{
         this.load.image('cafardMatrix', 'assets/enmi1Matrix.png');
         this.load.image('criquetMatrix', 'assets/enmi2Matrix.png');
         this.load.image('persoNormal', 'assets/player.png');
+
         this.load.spritesheet('AnimPlayer',
             'assets/animRun.png',
             { frameWidth: 1559, frameHeight: 1194  }
@@ -38,9 +39,10 @@ class Niveau1 extends Tableau{
             'assets/animEnmi2.png',
             { frameWidth: 966, frameHeight: 709  }
         );
+
         this.load.audio('MusicNormal', 'assets/sound/Normal.mp3');
         this.load.audio('MusicMatrix', 'assets/sound/Matrice.mp3');
-
+        this.load.image('Matrix', 'assets/francoisXavier/matrix.png')
     }
 
     create() {
@@ -166,6 +168,28 @@ class Niveau1 extends Tableau{
                 repeat:-1 //se répète à l'infini
             }
         });
+        this.starsFxContainer = this.add.container();
+        this.starsFxContainer.x = this.stars.x;
+        this.starsFxContainer.y =  this.stars.y;
+
+        this.particlesMatrix = this.add.particles('Matrix');
+        this.emmiter = this.particlesMatrix.createEmitter({
+            frequency: 25,
+            lifespan: 750,
+            quantity: 1,
+            gravityX: 0,
+            gravityY: 750,
+            x: { min: 0, max: 2 },
+            y: { min: 0, max: 2 },
+            radial: true,
+            scale: {min: -0.75 , max :0.75},
+            alpha: { start: 1, end: 0 },
+            speed: 0,
+            angle: { min: 0, max: 360 },
+        });
+
+
+        this.starsFxContainer.add(this.particlesMatrix);
 
 
         this.physics.add.collider(plate, cafard);

@@ -102,6 +102,7 @@ class Tableau extends Phaser.Scene{
                 }
             }
         }
+        Tableau.current.emmiter.on =false;
     }
 
 
