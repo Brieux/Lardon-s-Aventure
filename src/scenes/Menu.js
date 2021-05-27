@@ -71,7 +71,9 @@ class Menu extends Tableau{
         this.persou.body.setAllowGravity(false);
         this.persou.setDisplaySize(750,410);
 
-        this.text = this.add.text(1100,650, 'Cliquez pour commencer');
+        this.text = this.add.text(1100,650, 'Cliquez pour commencer',{
+            fontFamily: 'Hermes',
+        });
         this.text.setFontSize(40);
         this.tweens.add({
             targets: this.text,
