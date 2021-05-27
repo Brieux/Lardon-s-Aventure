@@ -52,7 +52,7 @@ class Niveau1 extends Tableau{
 
         //on définit la taille du tableau
 
-        let largeurDuTableau=7150;
+        let largeurDuTableau=8301;
         let hauteurDuTableau=964; //la hauteur est identique au cadre du jeu
         this.cameras.main.setBounds(0, 0, largeurDuTableau, hauteurDuTableau);
         this.physics.world.setBounds(0, 0, largeurDuTableau,  hauteurDuTableau);
@@ -202,12 +202,12 @@ class Niveau1 extends Tableau{
 
     update(time, delta){
         super.update()
-        if(this.player.y > 775){
+        /*if(this.player.y > 775){
             this.player.isDead=true;
             this.player.visible=false;
             this.player.isDead=false;
             this.scene.restart();
-        }
+        }*/
         if(super.getMatrix() && super.getAvailable()){
             this.sky2.setTexture('solMatrix');
             this.sky.setTexture('fondMatrix');
