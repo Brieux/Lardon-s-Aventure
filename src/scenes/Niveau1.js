@@ -80,7 +80,7 @@ class Niveau1 extends Tableau{
         this.sky=this.add.tileSprite(
             0,
             0,
-            1654,
+            8302,
             964,
             'bg'
         );
@@ -91,7 +91,7 @@ class Niveau1 extends Tableau{
         this.sky2=this.add.tileSprite(
             0,
             0,
-            4961,
+            8302,
             964,
             'terrain'
         );
@@ -108,11 +108,11 @@ class Niveau1 extends Tableau{
         this.physics.add.collider(this.player,this.platforms);
 
         //Monstres
-        cafard = new monstre2(this,2000,600);
+        /*cafard = new monstre2(this,2000,600);
         ennemis[0] = cafard;
 
         criquet = new monstreviolet(this,1500,200);
-        ennemis[1] = criquet;
+        ennemis[1] = criquet;*/
 
         let plate = this.physics.add.staticGroup();
         plate.create(0,775);
@@ -192,7 +192,7 @@ class Niveau1 extends Tableau{
         this.starsFxContainer.add(this.particlesMatrix);
 
 
-        this.physics.add.collider(plate, cafard);
+        /*this.physics.add.collider(plate, cafard);*/
         this.physics.add.collider(plate, this.stars);
         this.physics.add.overlap(this.player, this.stars, this.ramasserEtoile, null, this);
         ui.gagne();
@@ -212,50 +212,28 @@ class Niveau1 extends Tableau{
             this.sky2.setTexture('solMatrix');
             this.sky.setTexture('fondMatrix');
             this.player.setTexture('persoMatrix');
-            cafard.setTexture('cafardMatrix');
-            criquet.setTexture('criquetMatrix');
+            /*cafard.setTexture('cafardMatrix');
+            criquet.setTexture('criquetMatrix');*/
             this.player.body.enable = false;
-            cafard.body.enable = false;
+            /*cafard.body.enable = false;
             criquet.body.enable = false;
-            criquet.pausetween();
+            criquet.pausetween();*/
             this.AmbianceMatrix.volume = 1;
             this.Ambiance.volume = 0;
-            /*if(this.Ambiance.volume ===1 ){
-                this.tweens.add({
-                    targets:this.AmbianceMatrix,
-                    volume:1,
-                    duration:1500,
-                })
-            this.tweens.add({
-                    targets:this.Ambiance,
-                    volume:0,
-                    duration:1500,
-                })
-            }*/
+
         }
         if(!super.getMatrix() && super.getNormalMode()) {
             this.sky2.setTexture('terrain');
             this.sky.setTexture('fond');
-            cafard.y = cafard.y -20;
+            /*cafard.y = cafard.y -20;
             cafard.body.enable = true;
-            criquet.body.enable = true;
+            criquet.body.enable = true;*/
             this.player.body.enable = true;
-            criquet.playtween();
+            //criquet.playtween();
             super.normalMode = false;
             this.AmbianceMatrix.volume = 0;
             this.Ambiance.volume = 1;
-            /*if(this.AmbianceMatrix.volume === 1 ){
-                this.tweens.add({
-                    targets:this.AmbianceMatrix,
-                    volume:0,
-                    duration:1500,
-                })
-                this.tweens.add({
-                    targets:this.Ambiance,
-                    volume:1,
-                    duration:1500,
-                })
-            }*/
+
         }
         if(!super.getMatrix()) {
             this.player.move(this, time, delta);
@@ -265,8 +243,8 @@ class Niveau1 extends Tableau{
             //le deuxième ciel se déplace moins vite pour accentuer l'effet
             this.sky.tilePositionX = this.cameras.main.scrollX * 0.3 + 500;
 
-            cafard.update();
-            criquet.update();
+            /*cafard.update();
+            criquet.update();*/
 
             //console.log(cafard);
         }
