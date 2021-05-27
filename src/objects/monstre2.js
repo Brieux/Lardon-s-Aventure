@@ -30,6 +30,12 @@ class monstre2 extends ObjetEnnemi{
                 frameRate: 4,
                 repeat:-1
             });
+        this.anims.create(
+            {
+                key: 'die1',
+                frames: this.anims.generateFrameNumbers('Enmi1Die', { start: 0, end: 3}),
+                frameRate: 4
+            });
         this.anims.play('walk');
     }
 
@@ -44,6 +50,11 @@ class monstre2 extends ObjetEnnemi{
     }
 
     getKilled(){
-        this.destroy();
+        this.anims.play('die1');
+        this.isDead = true; //ok le monstre est mort
+        let here = this;
+        setTimeout(function(){
+            here.disableBody(true, true);
+        },500)
     }
 }

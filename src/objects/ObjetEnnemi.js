@@ -18,4 +18,5 @@ class ObjetEnnemi extends ObjetPhysique{
     }
 
 
+
 }

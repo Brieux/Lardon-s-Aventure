@@ -182,7 +182,7 @@ class Player extends Phaser.Physics.Arcade.Sprite{
               tweens: [
                   {
                       targets: Tableau.current.player.body.velocity,
-                      x: this.sens * 3000
+                      x: this.sens * 7500
                   },
                   {
                       targets: Tableau.current.player.body.velocity,
@@ -194,15 +194,18 @@ class Player extends Phaser.Physics.Arcade.Sprite{
 
       attackCac() {
           console.log(ennemis);
+          console.log(this.x);
+          console.log(this.y);
           var i;
           for (i = 0; i < ennemis.length; i++) {
               console.log(ennemis[i].x, ennemis[i].y);
+
               if (this._directionX > 0) {
                   console.log("droit");
                   if (ennemis[i].x > this.x) {
-                      if (((ennemis[i].x / 64) - 2) - (this.x / 64) <= 0) {
-                          ennemis[i].isDead = true; //ok le monstre est mort
-                          ennemis[i].disableBody(true, true);
+                      console.log(((ennemis[i].x / 64) - 250) - (this.x / 64) <= 0);
+                      if (((ennemis[i].x / 64) - 250) - (this.x / 64) <= 0) {
+                          ennemis[i].getKilled();
                       }
                   }
               }
@@ -210,9 +213,8 @@ class Player extends Phaser.Physics.Arcade.Sprite{
               if (this._directionX < 0) {
                   console.log("gauche");
                   if (ennemis[i].x < this.x) {
-                      if (((ennemis[i].x / 64) + 2) - (this.x / 64) >= 0) {
-                          ennemis[i].isDead = true; //ok le monstre est mort
-                          ennemis[i].disableBody(true, true);
+                      if (((ennemis[i].x / 64) + 250) - (this.x / 64) >= 0) {
+                          ennemis[i].getKilled();
                       }
                   }
               }

@@ -26,6 +26,12 @@ class monstreviolet extends ObjetEnnemi{
                 frameRate: 9,
                 repeat:-1
             });
+        this.anims.create(
+            {
+                key: 'die2',
+                frames: this.anims.generateFrameNumbers('Enmi2Die', { start: 0, end: 3}),
+                frameRate: 4
+            });
         this.anims.play('fly');
 
         this.tween1 = this.scene.tweens.add({
@@ -58,7 +64,15 @@ class monstreviolet extends ObjetEnnemi{
     playtween(){
         this.tween1.resume();
     }
+
+
     getKilled(){
+        this.anims.play('die2');
+        this.isDead = true; //ok le monstre est mort
+        let here = this;
+        setTimeout(function(){
+            here.disableBody(true, true);
+        },500)
 
     }
 
