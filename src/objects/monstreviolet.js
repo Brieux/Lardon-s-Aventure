@@ -30,7 +30,7 @@ class monstreviolet extends ObjetEnnemi{
             {
                 key: 'die2',
                 frames: this.anims.generateFrameNumbers('Enmi2Die', { start: 0, end: 3}),
-                frameRate: 4
+                frameRate: 2
             });
         this.anims.play('fly');
 

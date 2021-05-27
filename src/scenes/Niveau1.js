@@ -47,7 +47,7 @@ class Niveau1 extends Tableau{
         );
         this.load.spritesheet('Enmi1Die',
             'assets/animEnmi1Dead.png',
-            { frameWidth: 966, frameHeight: 709  }
+            { frameWidth: 1512, frameHeight: 702  }
         );
         this.load.audio('MusicNormal', 'assets/sound/Normal.mp3');
         this.load.audio('MusicMatrix', 'assets/sound/Matrice.mp3');
@@ -120,7 +120,7 @@ class Niveau1 extends Tableau{
         cafard = new monstre2(this,2000,600);
         ennemis[0] = cafard;
 
-        criquet = new monstreviolet(this,1500,200);
+        criquet = new monstreviolet(this,1500,100);
         ennemis[1] = criquet;
 
         let plate = this.physics.add.staticGroup();

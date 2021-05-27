@@ -204,7 +204,7 @@ class Player extends Phaser.Physics.Arcade.Sprite{
                   console.log("droit");
                   if (ennemis[i].x > this.x) {
                       console.log(((ennemis[i].x / 64) - 250) - (this.x / 64) <= 0);
-                      if (((ennemis[i].x / 64) - 250) - (this.x / 64) <= 0) {
+                      if (((ennemis[i].x / 64) - 200) - (this.x / 64) <= 0) {
                           ennemis[i].getKilled();
                       }
                   }
@@ -213,7 +213,7 @@ class Player extends Phaser.Physics.Arcade.Sprite{
               if (this._directionX < 0) {
                   console.log("gauche");
                   if (ennemis[i].x < this.x) {
-                      if (((ennemis[i].x / 64) + 250) - (this.x / 64) >= 0) {
+                      if (((ennemis[i].x / 64) + 200) - (this.x / 64) >= 0) {
                           ennemis[i].getKilled();
                       }
                   }
