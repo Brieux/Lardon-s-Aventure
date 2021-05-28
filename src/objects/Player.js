@@ -100,7 +100,6 @@ class Player extends Phaser.Physics.Arcade.Sprite{
     move(scene, time, delta){
         var posX = this.x / 64;
         posX = Math.trunc(posX);
-        //console.log("sur la case numero : " + posX);
         switch (true){
             case this._directionX<0:
                 this.setVelocityX(-550);
@@ -128,12 +127,10 @@ class Player extends Phaser.Physics.Arcade.Sprite{
       powerUp(scene, time, delta){
         this.dashUse = scene.input.keyboard.addKey('A');
         this.attackUse = scene.input.keyboard.addKey('Z');
-
         //attack cac
           if(this.meleeUnlocked) {
               if (this.attackUse.isDown) {
                   if (this.cacAvailable) {
-                      //console.log("attack"); //On fait un truc
                       this.attackCac();
                       this.cacAvailable = false;
                   }
@@ -193,17 +190,15 @@ class Player extends Phaser.Physics.Arcade.Sprite{
       }
 
       attackCac() {
-          console.log(ennemis);
-          console.log(this.x);
-          console.log(this.y);
+
           var i;
           for (i = 0; i < ennemis.length; i++) {
-              console.log(ennemis[i].x, ennemis[i].y);
+
 
               if (this._directionX > 0) {
-                  console.log("droit");
+
                   if (ennemis[i].x > this.x) {
-                      console.log(((ennemis[i].x / 64) - 250) - (this.x / 64) <= 0);
+
                       if (((ennemis[i].x / 64) - 200) - (this.x / 64) <= 0) {
                           ennemis[i].getKilled();
                       }
@@ -211,7 +206,7 @@ class Player extends Phaser.Physics.Arcade.Sprite{
               }
 
               if (this._directionX < 0) {
-                  console.log("gauche");
+
                   if (ennemis[i].x < this.x) {
                       if (((ennemis[i].x / 64) + 200) - (this.x / 64) >= 0) {
                           ennemis[i].getKilled();

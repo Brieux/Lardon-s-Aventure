@@ -37,7 +37,6 @@ class Tableau extends Phaser.Scene{
     create(){
         Tableau.current=this;
         this.sys.scene.scale.lockOrientation("landscape")
-        console.log("On est sur "+this.constructor.name+" / "+this.scene.key);
         /**
          * Le ciel en fond
          * @type {Phaser.GameObjects.Image}
@@ -72,12 +71,12 @@ class Tableau extends Phaser.Scene{
 
     chgt(){
         if (this.matrix){
-            console.log("version normal");
+
             this.matrix = false;
             this.normalMode = true;
         }
         else {
-            console.log("version matrix");
+
             this.matrix =  true;
         }
     }

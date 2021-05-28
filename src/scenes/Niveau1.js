@@ -51,7 +51,10 @@ class Niveau1 extends Tableau{
         );
         this.load.audio('MusicNormal', 'assets/sound/Normal.mp3');
         this.load.audio('MusicMatrix', 'assets/sound/Matrice.mp3');
-        this.load.image('Matrix', 'assets/francoisXavier/matrix.png')
+        this.load.image('Matrix', 'assets/francoisXavier/matrix.png');
+
+        this.load.image('FondTexte', 'assets/TexteNar/FondTexte.png');
+        this.load.image('texte1', 'assets/TexteNar/texteTest2.png');
     }
 
     create() {
@@ -221,6 +224,9 @@ class Niveau1 extends Tableau{
 
         super.normalMode = true;
 
+        this.fondTexte = this.add.image(850,250,'FondTexte').setBlendMode(1);
+        this.texte1 = this.add.image(850,250,'texte1');
+
     }
 
     update(time, delta){
@@ -269,7 +275,7 @@ class Niveau1 extends Tableau{
             cafard.update();
             criquet.update();
 
-            //console.log(cafard);
+
         }
     }
 

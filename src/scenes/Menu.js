@@ -17,6 +17,8 @@ class Menu extends Tableau{
             'assets/animIdleBureau.png',
             { frameWidth: 1559, frameHeight: 1194 })
         this.load.audio('TitleMusic', 'assets/sound/Titre .mp3');
+        this.load.image('FondTexte', 'assets/TexteNar/FondTexte.png');
+        this.load.image('texte1', 'assets/TexteNar/texteTest2.png');
     }
 
     create() {
@@ -96,20 +98,30 @@ class Menu extends Tableau{
             });
 
         this.musicAmb.play(musicConfig);
-
-
+        this.fondTexte = this.add.image(750,300,'FondTexte').setBlendMode(1);
+        this.texte1 = this.add.image(750,300,'texte1');
+        this.fondTexte.alpha =0;
+        this.texte1.alpha =0;
     }
 
     update(){
         super.update();
+        if(this.persou.x === 300 && (vid.getCurrentTime() === vid.getDuration())){
+            this.fondTexte.alpha +=0.02;
+            this.texte1.alpha += 0.02;
+        }
+        if(this.persou.x > 300){
+            this.fondTexte.alpha -=0.03;
+            this.texte1.alpha -= 0.03;
+        }
+        //console.l
+        // og(this.fondTexte.alpha);
         if (vid.getCurrentTime() == vid.getDuration()) {
             vid.alpha -= 0.1;
 
             let here = this;
             this.input.on('pointerdown', function(){
                 here.persou.body.setVelocity(800,0);
-                console.log;
-                console.log(here.anims);
                 here.tweens.add({
                     targets:here.musicAmb,
                     volume:0,
@@ -120,13 +132,10 @@ class Menu extends Tableau{
             //this.persou.body.setVelocity(400,0)
         }
         if(this.persou.x > 1000 && this.persou.x < 1100){
-            console.log("plop");
             this.cameras.main.fadeOut(500, 0, 0, 0);
         }
 
         if (this.persou.x > 1850){
-
-            console.log("loading new scne");
             this.load.reset();
             this.suivant();
 

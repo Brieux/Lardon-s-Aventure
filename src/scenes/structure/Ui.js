@@ -204,11 +204,9 @@ class Ui extends Phaser.Scene {
         let NameTwo;
         if (this.containersBool[0] == true){
             NameOne = this.activeContainer[0].texture.key;
-            console.log(NameOne);
         }
         if (this.containersBool[1] == true){
             NameTwo = this.activeContainer[1].texture.key;
-            console.log(NameTwo);
         }
 
 
