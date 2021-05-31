@@ -62,6 +62,8 @@ class Niveau1 extends Tableau{
         this.load.image('texte4', 'assets/TexteNar/textenarra4.png');
         this.load.image('FondTexte5', 'assets/TexteNar/FondTexte5.png');
         this.load.image('texte5', 'assets/TexteNar/textenarra5.png');
+        this.load.image('FondTexteUnlock', 'assets/TexteNar/FondTexteUnlock.png');
+        this.load.image('texteUnlock', 'assets/TexteNar/texteUnlock.png');
     }
 
     create() {
@@ -248,11 +250,16 @@ class Niveau1 extends Tableau{
         this.fondTexte4.alpha = 0;
         this.texte4.alpha = 0;
 
+        this.fondTexteUnlock = this.add.image(1225,300,'FondTexteUnlock').setBlendMode(1);
+        this.texteUnlock = this.add.image(1250,275,'texteUnlock');
+        this.fondTexteUnlock.alpha = 0;
+        this.texteUnlock.alpha = 0;
 
         this.Texte2Screen = true;
         this.Texte3OnScreen = true;
         this.Texte3OffScreen = true;
         this.Texte4OnScreen = true;
+        this.TexteUnlock = true;
 
     }
 
@@ -391,6 +398,8 @@ class Niveau1 extends Tableau{
                 }
             }
 
+
+
         if(this.Texte3OffScreen && this.Texte3OnScreen === false){
             if (!this.getMatr()){
                 this.tweens.add({
@@ -415,6 +424,51 @@ class Niveau1 extends Tableau{
                 });
                 this.Texte3OffScreen = false;
             }
+        }
+
+        if(this.Texte3OffScreen === false &&this.TexteUnlock === true){
+            this.tweens.add({
+                targets: this.fondTexteUnlock,
+                alpha: {
+                    from: 0,
+                    to:1, //on monte de 20 px
+                    duration: 500,// une demi seconde pour monter (et donc la même chose pour descendre)
+                    ease: 'Sine.easeInOut', //courbe d'accélération/décélération
+
+                }
+            });
+            this.tweens.add({
+                targets: this.texteUnlock,
+                alpha: {
+                    from: 0,
+                    to: 1, //on monte de 20 px
+                    duration: 500,// une demi seconde pour monter (et donc la même chose pour descendre)
+                    ease: 'Sine.easeInOut', //courbe d'accélération/décélération
+                }
+            });
+            let here= this;
+            setTimeout(function(){
+                here.tweens.add({
+                    targets: here.fondTexteUnlock,
+                    alpha: {
+                        from: 1,
+                        to:0, //on monte de 20 px
+                        duration: 500,// une demi seconde pour monter (et donc la même chose pour descendre)
+                        ease: 'Sine.easeInOut', //courbe d'accélération/décélération
+
+                    }
+                });
+                here.tweens.add({
+                    targets: here.texteUnlock,
+                    alpha: {
+                        from: 1,
+                        to: 0, //on monte de 20 px
+                        duration: 500,// une demi seconde pour monter (et donc la même chose pour descendre)
+                        ease: 'Sine.easeInOut', //courbe d'accélération/décélération
+                    }
+                });
+            }, 4000);
+            this.TexteUnlock = false;
         }
         // ----------------------------------------------------------------------------------------------
         // ----------------------------------------------------------------------------------------------

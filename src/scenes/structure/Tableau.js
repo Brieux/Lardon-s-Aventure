@@ -45,7 +45,7 @@ class Tableau extends Phaser.Scene{
     }
     update(time, delta){
         super.update();
-        if(this.input.keyboard.addKey("ALT").isDown && this.chgtAvailable && Tableau.current.scene.key == 'Niveau 1'){
+        if(this.input.keyboard.addKey("ALT").isDown && this.chgtAvailable && Tableau.current.scene.key === 'Niveau 1'){
             this.chgt();
             this.chgtAvailable = false;
 
@@ -53,9 +53,25 @@ class Tableau extends Phaser.Scene{
         }if(this.input.keyboard.addKey("ALT").isUp ){
             this.chgtAvailable = true;
         }
-
-
         this.player.update();
+    }
+
+    static reloadMode(){
+        this.chgtAvailable = true;
+    }
+
+    static switchMode() {
+        console.log("changement");
+        if (Tableau.current.matrix){
+
+            Tableau.current.matrix = false;
+            Tableau.current.normalMode = true;
+        }
+        else {
+
+            Tableau.current.matrix =  true;
+        }
+        Tableau.current.chgtAvailable = false;
     }
 
     chgt(){
