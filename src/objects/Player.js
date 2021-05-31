@@ -125,8 +125,8 @@ class Player extends Phaser.Physics.Arcade.Sprite{
     }
 
       powerUp(scene, time, delta){
-        this.dashUse = scene.input.keyboard.addKey('A');
-        this.attackUse = scene.input.keyboard.addKey('Z');
+        this.dashUse = scene.input.keyboard.addKey('SPACE');
+        this.attackUse = scene.input.keyboard.addKey('SPACE');
         //attack cac
           if(this.meleeUnlocked) {
               if (this.attackUse.isDown) {
