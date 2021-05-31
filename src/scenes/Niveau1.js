@@ -17,7 +17,8 @@ class Niveau1 extends Tableau{
         this.load.image('ground', 'assets/platform.png');;
         this.load.image('terrain', 'assets/BackGround1.png');
         this.load.image('solMatrix', 'assets/BackGround1_matrix.png');
-        this.load.image('fondMatrix', 'assets/backGround_Matrix.jpg');
+        this.load.image('fondMatrix', 'assets/backGroundMatrix.png');
+        this.load.image('fondNormal', 'assets/Background2.png');
         this.load.image('persoMatrix', 'assets/skinMatrix.png');
         this.load.image('cafardMatrix', 'assets/enmi1Matrix.png');
         this.load.image('criquetMatrix', 'assets/enmi2Matrix.png');
@@ -53,8 +54,14 @@ class Niveau1 extends Tableau{
         this.load.audio('MusicMatrix', 'assets/sound/Matrice.mp3');
         this.load.image('Matrix', 'assets/francoisXavier/matrix.png');
 
-        this.load.image('FondTexte', 'assets/TexteNar/FondTexte.png');
-        this.load.image('texte1', 'assets/TexteNar/texteTest2.png');
+        this.load.image('FondTexte2', 'assets/TexteNar/FondTexte2.png');
+        this.load.image('texte2', 'assets/TexteNar/textenarra2.png');
+        this.load.image('FondTexte3', 'assets/TexteNar/FondTexte3.png');
+        this.load.image('texte3', 'assets/TexteNar/textenarra3.png');
+        this.load.image('FondTexte4', 'assets/TexteNar/FondTexte4.png');
+        this.load.image('texte4', 'assets/TexteNar/textenarra4.png');
+        this.load.image('FondTexte5', 'assets/TexteNar/FondTexte5.png');
+        this.load.image('texte5', 'assets/TexteNar/textenarra5.png');
     }
 
     create() {
@@ -89,15 +96,12 @@ class Niveau1 extends Tableau{
         })
 
         //on change de ciel, on fait une tileSprite ce qui permet d'avoir une image qui se répète
-        this.sky=this.add.tileSprite(
+        this.sky=this.add.image(
             0,
             0,
-            9417,
-            964,
-            'bg'
+            'fondNormal'
         );
         this.sky.setOrigin(0,0);
-        this.sky.setScrollFactor(0);
 
         //on ajoute une deuxième couche de ciel
         this.sky2=this.add.tileSprite(
@@ -210,7 +214,7 @@ class Niveau1 extends Tableau{
         this.bus.setOffset(350,100);
         this.bus.body.pushable = false;
         this.physics.add.collider(this.player, this.bus);
-        this.tweens.add({
+        this.busTween = this.tweens.add({
             targets: this.bus,
             y: {
                 from: 600,
@@ -224,13 +228,37 @@ class Niveau1 extends Tableau{
 
         super.normalMode = true;
 
-        this.fondTexte = this.add.image(850,250,'FondTexte').setBlendMode(1);
-        this.texte1 = this.add.image(850,250,'texte1');
+        this.fondTexte = this.add.image(1200,250,'FondTexte2').setBlendMode(1);
+        this.texte1 = this.add.image(1200,250,'texte2');
+
+        this.fondTexte2 = this.add.image(1900,250,'FondTexte3').setBlendMode(1);
+        this.texte2 = this.add.image(1900,250,'texte3');
+        this.fondTexte2.alpha = 0;
+        this.texte2.alpha = 0;
+        this.fondTexte2.y = 600;
+        this.texte2.y =  600;
+
+        this.fondTexte3 = this.add.image(8620,750,'FondTexte4').setBlendMode(1);
+        this.texte3 = this.add.image(8620,750,'texte4');
+        this.fondTexte3.alpha = 0;
+        this.texte3.alpha = 0;
+
+        this.fondTexte4 = this.add.image(8850,550,'FondTexte5').setBlendMode(1);
+        this.texte4 = this.add.image(8850,550,'texte5');
+        this.fondTexte4.alpha = 0;
+        this.texte4.alpha = 0;
+
+
+        this.Texte2Screen = true;
+        this.Texte3OnScreen = true;
+        this.Texte3OffScreen = true;
+        this.Texte4OnScreen = true;
 
     }
 
     update(time, delta){
         super.update()
+        this.texteOnScreen();
         /*if(this.player.y > 775){
             this.player.isDead=true;
             this.player.visible=false;
@@ -243,22 +271,26 @@ class Niveau1 extends Tableau{
             this.player.setTexture('persoMatrix');
             cafard.setTexture('cafardMatrix');
             criquet.setTexture('criquetMatrix');
+            this.bus.setTexture('busMatrix');
             this.player.body.enable = false;
             cafard.body.enable = false;
             criquet.body.enable = false;
             criquet.pausetween();
+            this.busTween.pause();
             this.AmbianceMatrix.volume = 1;
             this.Ambiance.volume = 0;
 
         }
         if(!super.getMatrix() && super.getNormalMode()) {
             this.sky2.setTexture('terrain');
-            this.sky.setTexture('fond');
+            this.sky.setTexture('fondNormal');
+            this.bus.setTexture('busNormal');
             cafard.y = cafard.y -20;
             cafard.body.enable = true;
             criquet.body.enable = true;
             this.player.body.enable = true;
             criquet.playtween();
+            this.busTween.resume();
             super.normalMode = false;
             this.AmbianceMatrix.volume = 0;
             this.Ambiance.volume = 1;
@@ -269,8 +301,6 @@ class Niveau1 extends Tableau{
             this.player.powerUp(this, time, delta);
             //le ciel se déplace moins vite que la caméra pour donner un effet paralax
             this.sky2.tilePositionX = this.cameras.main.scrollX;
-            //le deuxième ciel se déplace moins vite pour accentuer l'effet
-            this.sky.tilePositionX = this.cameras.main.scrollX * 0.3 + 500;
 
             cafard.update();
             criquet.update();
@@ -299,6 +329,191 @@ class Niveau1 extends Tableau{
             volume:1,
             duration:1500,
         })
+    }
+
+    texteOnScreen(){
+        this.fondTexte.x = this.player.x + 450;
+        this.texte1.x = this.player.x + 450;
+
+        this.fondTexte2.x = this.player.x+500;
+        this.texte2.x = this.player.x+500;
+
+
+            if (this.Texte2Screen && (this.player.x >=500 || this.getMatr())){
+                this.tweens.add({
+                    targets: this.fondTexte,
+                    alpha: {
+                        from: 1,
+                        to:0, //on monte de 20 px
+                        duration: 500,// une demi seconde pour monter (et donc la même chose pour descendre)
+                        ease: 'Sine.easeInOut', //courbe d'accélération/décélération
+
+                    }
+                });
+                this.tweens.add({
+                    targets: this.texte1,
+                    alpha: {
+                        from: 1,
+                        to:0, //on monte de 20 px
+                        duration: 500,// une demi seconde pour monter (et donc la même chose pour descendre)
+                        ease: 'Sine.easeInOut', //courbe d'accélération/décélération
+
+                    }
+                });
+                this.Texte2Screen = false;
+        }
+            // ----------------------------------------------------------------------------------------------
+            // ----------------------------------------------------------------------------------------------
+            // ----------------------------------------------------------------------------------------------
+            if(this.Texte3OnScreen){
+                if (this.getMatr()){
+                    this.tweens.add({
+                        targets: this.fondTexte2,
+                        alpha: {
+                            from: 0,
+                            to:1, //on monte de 20 px
+                            duration: 500,// une demi seconde pour monter (et donc la même chose pour descendre)
+                            ease: 'Sine.easeInOut', //courbe d'accélération/décélération
+
+                        }
+                    });
+                    this.tweens.add({
+                        targets: this.texte2,
+                        alpha: {
+                            from: 0,
+                            to: 1, //on monte de 20 px
+                            duration: 500,// une demi seconde pour monter (et donc la même chose pour descendre)
+                            ease: 'Sine.easeInOut', //courbe d'accélération/décélération
+
+                        }
+                    });
+                    this.Texte3OnScreen = false;
+                }
+            }
+
+        if(this.Texte3OffScreen && this.Texte3OnScreen === false){
+            if (!this.getMatr()){
+                this.tweens.add({
+                    targets: this.fondTexte2,
+                    alpha: {
+                        from: 1,
+                        to:0, //on monte de 20 px
+                        duration: 500,// une demi seconde pour monter (et donc la même chose pour descendre)
+                        ease: 'Sine.easeInOut', //courbe d'accélération/décélération
+
+                    }
+                });
+                this.tweens.add({
+                    targets: this.texte2,
+                    alpha: {
+                        from: 1,
+                        to: 0, //on monte de 20 px
+                        duration: 500,// une demi seconde pour monter (et donc la même chose pour descendre)
+                        ease: 'Sine.easeInOut', //courbe d'accélération/décélération
+
+                    }
+                });
+                this.Texte3OffScreen = false;
+            }
+        }
+        // ----------------------------------------------------------------------------------------------
+        // ----------------------------------------------------------------------------------------------
+        // ----------------------------------------------------------------------------------------------
+        if(this.Texte4OnScreen){
+            if (this.player.x >=8200){
+                this.tweens.add({
+                    targets: this.fondTexte3,
+                    alpha: {
+                        from: 0,
+                        to:1, //on monte de 20 px
+                        duration: 500,// une demi seconde pour monter (et donc la même chose pour descendre)
+                        ease: 'Sine.easeInOut', //courbe d'accélération/décélération
+
+                    }
+                });
+                this.tweens.add({
+                    targets: this.texte3,
+                    alpha: {
+                        from: 0,
+                        to: 1, //on monte de 20 px
+                        duration: 500,// une demi seconde pour monter (et donc la même chose pour descendre)
+                        ease: 'Sine.easeInOut', //courbe d'accélération/décélération
+
+                    }
+                });
+                this.Texte4OnScreen =  false;
+                let here = this;
+                setTimeout(function(){
+                    here.tweens.add({
+                        targets: here.fondTexte3,
+                        alpha: {
+                            from: 1,
+                            to:0, //on monte de 20 px
+                            duration: 500,// une demi seconde pour monter (et donc la même chose pour descendre)
+                            ease: 'Sine.easeInOut', //courbe d'accélération/décélération
+
+                        }
+                    });
+                    here.tweens.add({
+                        targets: here.texte3,
+                        alpha: {
+                            from: 1,
+                            to: 0, //on monte de 20 px
+                            duration: 500,// une demi seconde pour monter (et donc la même chose pour descendre)
+                            ease: 'Sine.easeInOut', //courbe d'accélération/décélération
+                        }
+                    });
+                }, 4000);
+
+                setTimeout(function(){
+                    here.tweens.add({
+                        targets: here.fondTexte4,
+                        alpha: {
+                            from: 0,
+                            to:1, //on monte de 20 px
+                            duration: 500,// une demi seconde pour monter (et donc la même chose pour descendre)
+                            ease: 'Sine.easeInOut', //courbe d'accélération/décélération
+
+                        }
+                    });
+                    here.tweens.add({
+                        targets: here.texte4,
+                        alpha: {
+                            from: 0,
+                            to: 1, //on monte de 20 px
+                            duration: 500,// une demi seconde pour monter (et donc la même chose pour descendre)
+                            ease: 'Sine.easeInOut', //courbe d'accélération/décélération
+                        }
+                    });
+                }, 4500);
+
+                setTimeout(function(){
+                    here.tweens.add({
+                        targets: here.fondTexte4,
+                        alpha: {
+                            from: 1,
+                            to:0, //on monte de 20 px
+                            duration: 500,// une demi seconde pour monter (et donc la même chose pour descendre)
+                            ease: 'Sine.easeInOut', //courbe d'accélération/décélération
+
+                        }
+                    });
+                    here.tweens.add({
+                        targets: here.texte4,
+                        alpha: {
+                            from: 1,
+                            to: 0, //on monte de 20 px
+                            duration: 500,// une demi seconde pour monter (et donc la même chose pour descendre)
+                            ease: 'Sine.easeInOut', //courbe d'accélération/décélération
+                        }
+                    });
+                }, 8500);
+                setTimeout(function(){
+                    here.cameras.main.fadeOut(500, 0, 0, 0);
+                }, 9000);
+            }
+        }
+
     }
 }
 
