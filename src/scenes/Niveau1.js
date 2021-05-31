@@ -510,6 +510,7 @@ class Niveau1 extends Tableau{
                 }, 8500);
                 setTimeout(function(){
                     here.cameras.main.fadeOut(500, 0, 0, 0);
+                    here.player.body.enable = false;
                 }, 9000);
             }
         }
