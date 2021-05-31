@@ -21,8 +21,12 @@ class GamePadButtons extends GameKeyboard{
         this.add(btnUP);
         this.add(btnLEFT);
         this.add(btnRIGHT);
-
         this.add(btnA);
+
+        btnUP.setInteractive();
+        btnLEFT.setInteractive();
+        btnRIGHT.setInteractive();
+        btnA.setInteractive();
 
         btnUP.x=scene.sys.canvas.width * -1 + w * 6;
         btnLEFT.x=w*-2;
