@@ -1,5 +1,5 @@
 # platfomer
-https://brieux.github.io/plate-formmeur/
+https://brieux.github.io/Lardon-s-Aventure/
 http://localhost/platformer/
 
 
