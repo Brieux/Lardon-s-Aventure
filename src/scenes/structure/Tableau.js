@@ -61,14 +61,11 @@ class Tableau extends Phaser.Scene{
     }
 
     static switchMode() {
-        console.log("changement");
         if (Tableau.current.matrix){
-
             Tableau.current.matrix = false;
             Tableau.current.normalMode = true;
         }
         else {
-
             Tableau.current.matrix =  true;
         }
         Tableau.current.chgtAvailable = false;

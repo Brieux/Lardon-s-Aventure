@@ -16,9 +16,11 @@ class GamePadButtons extends GameKeyboard{
         btnUP.setInteractive();
         btnUP.on('pointerdown',function(){
                 Tableau.current.player.directionY=-1;
+                btnUP.scale = 0.9;
         });
         btnUP.on('pointerup',function(){
                 Tableau.current.player.directionY=-0;
+                btnUP.scale = 1;
         });
 
         let btnLEFT=scene.add.circle(0,0,w*2,0xffffff,0.3).setInteractive();
@@ -26,9 +28,11 @@ class GamePadButtons extends GameKeyboard{
         btnLEFT.setInteractive();
         btnLEFT.on('pointerdown',function(){
                 Tableau.current.player.directionX=-1;
+                btnUP.scale = 0.9;
         });
         btnLEFT.on('pointerup',function(){
                 Tableau.current.player.directionX=0;
+                btnUP.scale = 1;
         });
 
         let btnRIGHT=scene.add.circle(0,0,w*2,0xffffff,0.3).setInteractive();
