@@ -16,11 +16,11 @@ class GamePadButtons extends GameKeyboard{
         btnUP.setInteractive();
         btnUP.on('pointerdown',function(){
                 Tableau.current.player.directionY=-1;
-                btnUP.scale = 0.5;
+                btnUP.alpha = 0.75;
         });
         btnUP.on('pointerup',function(){
                 Tableau.current.player.directionY=-0;
-                btnUP.scale = 1;
+                btnUP.alpha = 1;
         });
 
         let btnLEFT=scene.add.circle(0,0,w*2,0xffffff,0.3).setInteractive();
@@ -28,11 +28,11 @@ class GamePadButtons extends GameKeyboard{
         btnLEFT.setInteractive();
         btnLEFT.on('pointerdown',function(){
                 Tableau.current.player.directionX=-1;
-                btnLEFT.scale = 0.5;
+                btnLEFT.alpha = 0.75;
         });
         btnLEFT.on('pointerup',function(){
                 Tableau.current.player.directionX=0;
-                btnLEFT.scale = 1;
+                btnLEFT.alpha = 1;
         });
 
         let btnRIGHT=scene.add.circle(0,0,w*2,0xffffff,0.3).setInteractive();
@@ -40,9 +40,11 @@ class GamePadButtons extends GameKeyboard{
         btnRIGHT.setInteractive();
         btnRIGHT.on('pointerdown',function(){
                 Tableau.current.player.directionX=1;
+                btnRIGHT.alpha = 0.75;
         });
         btnRIGHT.on('pointerup',function(){
                 Tableau.current.player.directionX=0;
+                btnRIGHT.alpha = 1;
         });
 
 
@@ -51,9 +53,11 @@ class GamePadButtons extends GameKeyboard{
         btnA.setInteractive();
         btnA.on('pointerdown',function(){
                 Tableau.switchMode();
+                btnA.alpha = 0.75;
         });
         btnA.on('pointerup',function(){
                 Tableau.reloadMode();
+                btnA.alpha = 1;
         });
 
 
