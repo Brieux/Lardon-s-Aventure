@@ -12,21 +12,46 @@ class GamePadButtons extends GameKeyboard{
         let pad2=scene.add.container();
 
         let btnUP=scene.add.circle(0,0,w*2,0xff0000,0.3).setInteractive();
+        this.add(btnUP);
+        btnUP.setInteractive();
+        btnUP.on('pointerdown',function(){
+                Tableau.current.player.directionY=-1;
+        });
+        btnUP.on('pointerup',function(){
+                Tableau.current.player.directionY=-0;
+        });
+
         let btnLEFT=scene.add.circle(0,0,w*2,0xffffff,0.3).setInteractive();
+        this.add(btnLEFT);
+        btnLEFT.setInteractive();
+        btnLEFT.on('pointerdown',function(){
+                Tableau.current.player.directionX=-1;
+        });
+        btnLEFT.on('pointerup',function(){
+                Tableau.current.player.directionX=0;
+        });
+
         let btnRIGHT=scene.add.circle(0,0,w*2,0xffffff,0.3).setInteractive();
+        this.add(btnRIGHT);
+        btnRIGHT.setInteractive();
+        btnRIGHT.on('pointerdown',function(){
+                Tableau.current.player.directionX=1;
+        });
+        btnRIGHT.on('pointerup',function(){
+                Tableau.current.player.directionX=0;
+        });
 
 
         let btnA=scene.add.circle(0,0,w*2,0x00ff00,0.3).setInteractive();
-
-        this.add(btnUP);
-        this.add(btnLEFT);
-        this.add(btnRIGHT);
         this.add(btnA);
-
-        btnUP.setInteractive();
-        btnLEFT.setInteractive();
-        btnRIGHT.setInteractive();
         btnA.setInteractive();
+        btnA.on('pointerdown',function(){
+                Tableau.switchMode();
+        });
+        btnA.on('pointerup',function(){
+                Tableau.reloadMode();
+        });
+
 
         btnUP.x=scene.sys.canvas.width * -1 + w * 10;
         btnLEFT.x=w*-4.5;
@@ -34,45 +59,8 @@ class GamePadButtons extends GameKeyboard{
         btnLEFT.y=w*-1;
         btnRIGHT.y=w*-1;
         btnUP.y=w*-0.9;
-
-
         btnA.x=scene.sys.canvas.width * -1 + w * 6;
         btnA.y=w*-2.4;
-
-
-        btnLEFT.on('pointerdown',function(){
-            Tableau.current.player.directionX=-1;
-        });
-        btnRIGHT.on('pointerdown',function(){
-            Tableau.current.player.directionX=1;
-        });
-        btnUP.on('pointerdown',function(){
-            Tableau.current.player.directionY=-1;
-        });
-
-
-        btnLEFT.on('pointerup',function(){
-            Tableau.current.player.directionX=0;
-        });
-        btnRIGHT.on('pointerup',function(){
-            Tableau.current.player.directionX=0;
-        });
-        btnUP.on('pointerup',function(){
-            Tableau.current.player.directionY=-0;
-        });
-
-
-        btnA.on('pointerdown',function(){
-            Tableau.switchMode();
-        });
-        btnA.on('pointerup',function(){
-                Tableau.reloadMode();
-        });
-
-
-
-
-
     }
 
 }
