@@ -34,7 +34,7 @@ class monstre2 extends ObjetEnnemi{
             {
                 key: 'die1',
                 frames: this.anims.generateFrameNumbers('Enmi1Die', { start: 0, end: 3}),
-                frameRate: 2
+                frameRate: 12
             });
         this.anims.play('walk');
     }

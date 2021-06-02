@@ -14,12 +14,12 @@ let config = {
         default: 'arcade',
         arcade: {
             gravity: { y: 100*3 },
-            debug: true,
+            debug: false,
         }
     },
     scene: [
         new Ui(),
-        new Menu("Bureau"),
+        //new Menu("Bureau"),
         new Niveau1("Niveau 1"),
     ],
     width: width,

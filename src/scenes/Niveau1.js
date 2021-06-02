@@ -104,6 +104,34 @@ class Niveau1 extends Tableau{
             'fondNormal'
         );
         this.sky.setOrigin(0,0);
+        this.skyBug=this.add.image(
+            0,
+            0,
+            'fondMatrix'
+        ).setBlendMode(1);
+        this.skyBug.setOrigin(0,0);
+        this.skyBug.alpha = 0.25;
+
+        this.tweens.add({
+            targets: this.skyBug,
+            x: {
+                from: 0,
+                to:75, //on monte de 20 px
+                duration: 125,// une demi seconde pour monter (et donc la même chose pour descendre)
+                ease: 'Sine.easeInOut', //courbe d'accélération/décélération
+                yoyo: -1, // de haut en bas, puis de bas en haut
+                repeat:-1 //se répète à l'infini
+            },
+            y: {
+                from: 0,
+                to:15, //on monte de 20 px
+                duration: 125,// une demi seconde pour monter (et donc la même chose pour descendre)
+                ease: 'Sine.easeInOut', //courbe d'accélération/décélération
+                yoyo: -1, // de haut en bas, puis de bas en haut
+                repeat:-1 //se répète à l'infini
+            }
+        });
+        this.skyBug.visible = false;
 
         //on ajoute une deuxième couche de ciel
         this.sky2=this.add.tileSprite(
@@ -116,8 +144,6 @@ class Niveau1 extends Tableau{
         this.sky2.setScrollFactor(0);
         this.sky2.setOrigin(0,0);
         this.sky2.alpha=1;
-
-
         this.player.setDepth(10);
 
         this.physics.add.overlap(this.player, this.star1, this.ramasserEtoile, null, this);
@@ -286,6 +312,7 @@ class Niveau1 extends Tableau{
             this.busTween.pause();
             this.AmbianceMatrix.volume = 1;
             this.Ambiance.volume = 0;
+            this.skyBug.visible = true;
 
         }
         if(!super.getMatrix() && super.getNormalMode()) {
@@ -301,6 +328,7 @@ class Niveau1 extends Tableau{
             super.normalMode = false;
             this.AmbianceMatrix.volume = 0;
             this.Ambiance.volume = 1;
+            this.skyBug.visible = false;
 
         }
         if(!super.getMatrix()) {
