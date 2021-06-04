@@ -18,7 +18,7 @@ class monstre2 extends ObjetEnnemi{
         this.body.allowGravity=true;
 
         this.setDisplaySize(6,6);
-        this.setVelocityX(45);
+        this.setVelocityX(-45);
         this.setCollideWorldBounds(true);
         this.setBounce(1,0);
         this.setSize(700,700)
@@ -41,12 +41,12 @@ class monstre2 extends ObjetEnnemi{
 
 
     update(){
-      if (this.body.velocity.x > 0){
-        this.flipX = true;
-      }
-      else {
-        this.flipX = false;
-      }
+        if(this.body.touching.right){
+            this.flipX = !this.flipX;
+        }
+        if(this.body.touching.left){
+            this.flipX = !this.flipX;
+        }
     }
 
     getKilled(){

@@ -199,7 +199,7 @@ class Player extends Phaser.Physics.Arcade.Sprite{
 
                   if (ennemis[i].x > this.x) {
 
-                      if (((ennemis[i].x / 64) - 200) - (this.x / 64) <= 0) {
+                      if (((ennemis[i].x / 64) - 5) - (this.x / 64) <= 0) {
                           ennemis[i].getKilled();
                       }
                   }
@@ -208,7 +208,7 @@ class Player extends Phaser.Physics.Arcade.Sprite{
               if (this._directionX < 0) {
 
                   if (ennemis[i].x < this.x) {
-                      if (((ennemis[i].x / 64) + 200) - (this.x / 64) >= 0) {
+                      if (((ennemis[i].x / 64) + 5) - (this.x / 64) >= 0) {
                           ennemis[i].getKilled();
                       }
                   }

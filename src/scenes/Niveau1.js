@@ -155,8 +155,12 @@ class Niveau1 extends Tableau{
         cafard = new monstre2(this,2000,600);
         ennemis[0] = cafard;
 
+        cafard2 = new monstre2(this,5000,300);
+        ennemis[2] = cafard2;
+
         criquet = new monstreviolet(this,1500,100);
         ennemis[1] = criquet;
+
 
         let plate = this.physics.add.staticGroup();
         plate.create(0,775);
@@ -190,6 +194,24 @@ class Niveau1 extends Tableau{
             collidingTileColor: new Phaser.Display.Color(0, 255, 0, 255), //Couleur des tiles qui collident
             faceColor: null // Color of colliding face edges
         });*/
+
+        let mur = this.physics.add.sprite(1700,725);
+        mur.body.setAllowGravity(false);
+        mur.body.immovable = true;
+        mur.visible = false;
+        this.physics.add.collider(mur, cafard);
+
+        let mur2 = this.physics.add.sprite(4600,380);
+        mur2.body.setAllowGravity(false);
+        mur2.body.immovable = true;
+        mur2.visible = false;
+        this.physics.add.collider(mur2, cafard2);
+
+        let mur3 = this.physics.add.sprite(5700,380);
+        mur3.body.setAllowGravity(false);
+        mur3.body.immovable = true;
+        mur3.visible = false;
+        this.physics.add.collider(mur3, cafard2);
 
         this.stars = this.physics.add.sprite(600,600,"star").setCollideWorldBounds(true).setBounce(0.4);
         this.stars.body.setAllowGravity(false);
@@ -231,6 +253,7 @@ class Niveau1 extends Tableau{
 
 
         this.physics.add.collider(plate, cafard);
+        this.physics.add.collider(plate, cafard2);
         this.physics.add.collider(plate, this.stars);
         this.physics.add.overlap(this.player, this.stars, this.ramasserEtoile, null, this);
         ui.gagne();
@@ -292,12 +315,12 @@ class Niveau1 extends Tableau{
     update(time, delta){
         super.update()
         this.texteOnScreen();
-        if(this.player.y > 775){
+        /*if(this.player.y > 775){
             this.player.isDead=true;
             this.player.visible=false;
             this.player.isDead=false;
             this.scene.restart();
-        }
+        }*/
         if(super.getMatrix() && super.getAvailable()){
             this.sky2.setTexture('solMatrix');
             this.sky.setTexture('fondMatrix');
