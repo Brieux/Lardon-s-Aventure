@@ -7,7 +7,7 @@ class Niveau1 extends Tableau{
 
 
     constructor() {
-        super('Niveau 1');
+        super('Ville');
     }
     preload() {
         super.preload();
@@ -315,12 +315,12 @@ class Niveau1 extends Tableau{
     update(time, delta){
         super.update()
         this.texteOnScreen();
-        /*if(this.player.y > 775){
+        if(this.player.y > 775){
             this.player.isDead=true;
             this.player.visible=false;
             this.player.isDead=false;
             this.scene.restart();
-        }*/
+        }
         if(super.getMatrix() && super.getAvailable()){
             this.sky2.setTexture('solMatrix');
             this.sky.setTexture('fondMatrix');
