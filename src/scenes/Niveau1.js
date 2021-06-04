@@ -326,10 +326,12 @@ class Niveau1 extends Tableau{
             this.sky.setTexture('fondMatrix');
             this.player.setTexture('persoMatrix');
             cafard.setTexture('cafardMatrix');
+            cafard2.setTexture('cafardMatrix');
             criquet.setTexture('criquetMatrix');
             this.bus.setTexture('busMatrix');
             this.player.body.enable = false;
             cafard.body.enable = false;
+            cafard2.body.enable = false;
             criquet.body.enable = false;
             criquet.pausetween();
             this.busTween.pause();
@@ -343,7 +345,9 @@ class Niveau1 extends Tableau{
             this.sky.setTexture('fondNormal');
             this.bus.setTexture('busNormal');
             cafard.y = cafard.y -20;
+            cafard2.y = cafard2.y -20;
             cafard.body.enable = true;
+            cafard2.body.enable = true;
             criquet.body.enable = true;
             this.player.body.enable = true;
             criquet.playtween();

@@ -45,7 +45,7 @@ class Tableau extends Phaser.Scene{
     }
     update(time, delta){
         super.update();
-        if(this.input.keyboard.addKey("ALT").isDown && this.chgtAvailable && Tableau.current.scene.key === 'Niveau 1'){
+        if(this.input.keyboard.addKey("ALT").isDown && this.chgtAvailable && Tableau.current.scene.key === 'Ville'){
             this.chgt();
             this.chgtAvailable = false;
 
